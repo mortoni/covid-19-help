@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -11,6 +11,7 @@ import CreateIcon from '@material-ui/icons/Create'
 import Avatar from '../Avatar'
 import Logo from '../../assets/logo.png'
 import OneAnother from '../../assets/oneAnother.png'
+import Dialog from '../Dialog'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -24,57 +25,68 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MenuAppBar() {
   const classes = useStyles()
+  const [openPost, setPost] = useState(false)
 
   return (
-    <AppBar position="static" color="transparent" elevation={0} className={classes.appBar}>
-      <Toolbar>
-        <Box display={{ xs: 'none', md: 'flex' }} flexDirection="column" flexGrow={1}>
-          <img src={Logo} alt="Logo" width={32} height={32} />
+    <>
+      <AppBar position="static" color="transparent" elevation={0} className={classes.appBar}>
+        <Toolbar>
+          <Box display={{ xs: 'none', md: 'flex' }} flexDirection="column" flexGrow={1}>
+            <img src={Logo} alt="Logo" width={32} height={32} />
 
-          <Typography variant="body1">Dashboard</Typography>
-        </Box>
+            <Typography variant="body1">Dashboard</Typography>
+          </Box>
 
-        <Box display="flex" flexGrow={1}>
-          <img src={OneAnother} alt="Logo" width={68} height={64} />
-        </Box>
+          <Box display="flex" flexGrow={1}>
+            <img src={OneAnother} alt="Logo" width={68} height={64} />
+          </Box>
 
-        <Box flexGrow={{ xs: 1, sm: 0 }}>
-          <Button variant="contained" color="primary" className={classes.button} startIcon={<CreateIcon />}>
-            Post
-          </Button>
-        </Box>
+          <Box flexGrow={{ xs: 1, sm: 0 }}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              startIcon={<CreateIcon />}
+              onClick={() => !openPost && setPost(true)}
+            >
+              Post
+            </Button>
+          </Box>
 
-        <Box display={{ xs: 'none', sm: 'flex' }}>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            color="primary"
-          >
-            <NotesIcon style={{ fontSize: 30 }} />
-          </IconButton>
+          <Box display={{ xs: 'none', sm: 'flex' }}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="primary"
+            >
+              <NotesIcon style={{ fontSize: 30 }} />
+            </IconButton>
 
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            color="primary"
-          >
-            <NotificationIcon style={{ fontSize: 30 }} />
-          </IconButton>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="primary"
+            >
+              <NotificationIcon style={{ fontSize: 30 }} />
+            </IconButton>
 
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            color="primary"
-          >
-            <SmsIcon style={{ fontSize: 30 }} />
-          </IconButton>
-        </Box>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="primary"
+            >
+              <SmsIcon style={{ fontSize: 30 }} />
+            </IconButton>
+          </Box>
 
-        <Avatar />
-      </Toolbar>
-    </AppBar>
+          <Avatar />
+        </Toolbar>
+      </AppBar>
+
+      <Dialog open={openPost} setOpen={setPost} />
+    </>
   )
 }

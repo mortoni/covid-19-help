@@ -84,7 +84,7 @@ function Dashboard() {
                 </Grid>
                 <Grid item xs={showMap ? 12 : 0} md={showMap ? 6 : 0}>
                   <Box my={{ xs: 0, md: 2 }} display={showMap ? 'flex' : 'none'}>
-                    <OAMap />
+                    {/* <OAMap /> */}
                   </Box>
                 </Grid>
               </Grid>
