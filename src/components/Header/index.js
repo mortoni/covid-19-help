@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import { IconButton, Button, Box, Grid } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
+import { IconButton, Button, Box } from '@material-ui/core'
 import SmsIcon from '@material-ui/icons/Sms'
 import NotificationIcon from '@material-ui/icons/Notifications'
 import NotesIcon from '@material-ui/icons/Notes'
@@ -29,7 +28,7 @@ export default function MenuAppBar() {
   return (
     <AppBar position="static" color="transparent" elevation={0} className={classes.appBar}>
       <Toolbar>
-        <Box display={{ xs: 'none', sm: 'flex' }} flexDirection="column" flexGrow={1}>
+        <Box display={{ xs: 'none', md: 'flex' }} flexDirection="column" flexGrow={1}>
           <img src={Logo} alt="Logo" width={32} height={32} />
 
           <Typography variant="body1">Dashboard</Typography>
