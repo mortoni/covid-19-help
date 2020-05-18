@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import { ThemeProvider, StylesProvider } from '@material-ui/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import { createMuiTheme } from '@material-ui/core'
 import Dashboard from './components/Dashboard'
 import * as serviceWorker from './serviceWorker'
@@ -10,6 +11,7 @@ import theme from './theme'
 
 ReactDOM.render(
   <React.StrictMode>
+    <CssBaseline />
     <StylesProvider>
       <ThemeProvider theme={createMuiTheme(theme)}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>

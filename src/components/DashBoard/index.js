@@ -43,8 +43,8 @@ function Dashboard() {
   return (
     <Box>
       <Header />
-      <Box my={4}>
-        <Container maxWidth={showMap ? 'xl' : 'md'}>
+      <Box mt={4}>
+        <Container maxWidth={showMap ? 'xl' : 'md'} disableGutters>
           <Box display="flex" justifyContent="space-between" flexDirection={{ xs: 'column-reverse', sm: 'row' }}>
             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
               <Tab label="Task" {...a11yProps(0)} />
