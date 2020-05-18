@@ -5,9 +5,13 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import { ThemeProvider, StylesProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { createMuiTheme } from '@material-ui/core'
-import Dashboard from './components/Dashboard'
+import { Router } from '@reach/router'
 import * as serviceWorker from './serviceWorker'
 import theme from './theme'
+import { ROUTERS } from './routes'
+
+import Dashboard from './components/Dashboard'
+import LandingPage from './pages/LandingPage'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +19,10 @@ ReactDOM.render(
     <StylesProvider>
       <ThemeProvider theme={createMuiTheme(theme)}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Dashboard />
+          <Router>
+            <LandingPage path={ROUTERS.LANDINGPAGE} />
+            <Dashboard path={ROUTERS.DASHBOARD} />
+          </Router>
         </MuiPickersUtilsProvider>
       </ThemeProvider>
     </StylesProvider>
