@@ -1,15 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Dashboard from './components/Dashboard'
-import * as serviceWorker from './serviceWorker'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import { ThemeProvider, StylesProvider } from '@material-ui/styles'
+import { createMuiTheme } from '@material-ui/core'
+import Dashboard from './components/Dashboard'
+import * as serviceWorker from './serviceWorker'
+import theme from './theme'
 
 ReactDOM.render(
   <React.StrictMode>
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Dashboard />
-    </MuiPickersUtilsProvider>
+    <StylesProvider>
+      <ThemeProvider theme={createMuiTheme(theme)}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Dashboard />
+        </MuiPickersUtilsProvider>
+      </ThemeProvider>
+    </StylesProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 )
