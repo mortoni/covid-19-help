@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box, Container, Tabs, Tab, IconButton, Grid } from '@material-ui/core'
-import Header from '../Header'
 import { makeStyles } from '@material-ui/core/styles'
-import TabPanel from './components/TabPanel'
 import MapIcon from '@material-ui/icons/Map'
 import TuneIcon from '@material-ui/icons/Tune'
+import TabPanel from './components/TabPanel'
 import TaskTile from '../TaskTile'
-import OAMap from '../Map'
+import Header from '../Header'
+import OAMap from '../OAMap'
 
 function a11yProps(index) {
   return {
