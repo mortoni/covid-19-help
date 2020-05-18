@@ -37,5 +37,11 @@ export default {
       '"Segoe UI Symbol"',
     ].join(','),
   },
-  overrides: {},
+  overrides: {
+    MuiPaper: {
+      rounded: {
+        borderRadius: 24,
+      },
+    },
+  },
 }
