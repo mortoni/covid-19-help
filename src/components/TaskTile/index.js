@@ -46,11 +46,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TaskTile() {
   const classes = useStyles()
-  const [expanded, setExpanded] = React.useState(false)
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
-  }
 
   return (
     <Card className={classes.card}>
@@ -72,9 +67,7 @@ export default function TaskTile() {
       />
 
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          <Chip label="Dog Walking" />
-        </Typography>
+        <Chip label="Dog Walking" />
       </CardContent>
 
       <CardActions disableSpacing>

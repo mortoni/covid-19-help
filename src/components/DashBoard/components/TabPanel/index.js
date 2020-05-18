@@ -1,9 +1,7 @@
 import React from 'react'
-import { Box, Typography } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 
-export default function TabPanel(props) {
-  const { children, value, index, ...other } = props
-
+const TabPanel = ({ children, value, index, ...other }) => {
   return (
     <div
       role="tabpanel"
@@ -16,3 +14,5 @@ export default function TabPanel(props) {
     </div>
   )
 }
+
+export default TabPanel

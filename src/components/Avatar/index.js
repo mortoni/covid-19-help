@@ -32,14 +32,6 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge)
 
-const SmallAvatar = withStyles((theme) => ({
-  root: {
-    width: 22,
-    height: 22,
-    border: `2px solid ${theme.palette.background.paper}`,
-  },
-}))(Avatar)
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',

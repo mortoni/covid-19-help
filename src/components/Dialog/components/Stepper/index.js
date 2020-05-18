@@ -1,7 +1,8 @@
 import React, { useState, createElement } from 'react'
-import { Stepper, Step, StepLabel, Button, Grid, Box } from '@material-ui/core'
+import { Stepper, Step, StepLabel, Button, Grid, Box, useMediaQuery } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ArrowNextIcon from '@material-ui/icons/ArrowForward'
+import { useTheme } from '@material-ui/core/styles'
 import ColorlibConnector from './components/ColorlibConnector'
 import StepIcon from './components/StepIcon'
 import TaskType from './TaskType'
@@ -11,6 +12,8 @@ import TaskNotes from './TaskNotes'
 import TaskDate from './TaskDate'
 
 const OAStepper = () => {
+  const theme = useTheme()
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'))
   const steps = [
     { label: 'Type', component: TaskType },
     { label: 'Situation', component: TaskSituation },
@@ -19,7 +22,6 @@ const OAStepper = () => {
     { label: 'When', component: TaskDate },
   ]
   const [activeStep, setActiveStep] = useState(0)
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }
@@ -32,7 +34,7 @@ const OAStepper = () => {
     <>
       <Grid container>
         <Grid item xs={12}>
-          <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+          <Stepper alternativeLabel activeStep={activeStep} connector={isSmall ? null : <ColorlibConnector />}>
             {steps.map(({ label }) => (
               <Step key={label}>
                 <StepLabel StepIconComponent={StepIcon}>{label}</StepLabel>

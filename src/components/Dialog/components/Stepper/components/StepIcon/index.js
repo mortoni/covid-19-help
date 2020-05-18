@@ -7,7 +7,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd'
 import VideoLabelIcon from '@material-ui/icons/VideoLabel'
 import clsx from 'clsx'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#ccc',
     zIndex: 1,
@@ -18,6 +18,10 @@ const useStyles = makeStyles({
     borderRadius: '50%',
     justifyContent: 'center',
     alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+      width: 35,
+      height: 35,
+    },
   },
   active: {
     background: 'linear-gradient(188.41deg, #B39FD9 7.47%, #6C63FF 92.23%)',
@@ -26,7 +30,7 @@ const useStyles = makeStyles({
   completed: {
     background: 'linear-gradient(188.41deg, #B39FD9 7.47%, #6C63FF 92.23%)',
   },
-})
+}))
 
 function StepIcon(props) {
   const classes = useStyles()

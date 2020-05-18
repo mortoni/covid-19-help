@@ -76,13 +76,13 @@ function Dashboard() {
 
           <Box className={classes.tabPanel}>
             <TabPanel value={value} index={0}>
-              <Grid container class={classes.container}>
+              <Grid container className={classes.container}>
                 <Grid item xs={12} md={showMap ? 6 : 12}>
                   <TaskTile />
                   <TaskTile />
                   <TaskTile />
                 </Grid>
-                <Grid item xs={showMap ? 12 : 0} md={showMap ? 6 : 0}>
+                <Grid item xs={showMap ? 12 : null} md={showMap ? 6 : null}>
                   <Box my={{ xs: 0, md: 2 }} display={showMap ? 'flex' : 'none'}>
                     {/* <OAMap /> */}
                   </Box>
