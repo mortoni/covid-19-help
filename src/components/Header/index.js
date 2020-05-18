@@ -4,14 +4,14 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { IconButton, Button, Box } from '@material-ui/core'
-import SmsIcon from '@material-ui/icons/Sms'
-import NotificationIcon from '@material-ui/icons/Notifications'
 import NotesIcon from '@material-ui/icons/Notes'
 import CreateIcon from '@material-ui/icons/Create'
-import Avatar from '../Avatar'
 import Logo from '../../assets/logo.png'
 import OneAnother from '../../assets/oneAnother.png'
 import Dialog from '../Dialog'
+import Notifications from './components/Notification'
+import Messages from './components/Messages'
+import UserMenu from './components/UserMenu'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
   },
 }))
-
 export default function MenuAppBar() {
   const classes = useStyles()
   const [openPost, setPost] = useState(false)
@@ -63,26 +62,12 @@ export default function MenuAppBar() {
               <NotesIcon style={{ fontSize: 30 }} />
             </IconButton>
 
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="primary"
-            >
-              <NotificationIcon style={{ fontSize: 30 }} />
-            </IconButton>
+            <Notifications />
 
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="primary"
-            >
-              <SmsIcon style={{ fontSize: 30 }} />
-            </IconButton>
+            <Messages />
           </Box>
 
-          <Avatar />
+          <UserMenu />
         </Toolbar>
       </AppBar>
 

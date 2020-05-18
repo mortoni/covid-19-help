@@ -1,19 +1,15 @@
-import React, { useState } from 'react'
-
-import Button from '@material-ui/core/Button'
-import { Dialog, Slide } from '@material-ui/core'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import ArrowNextIcon from '@material-ui/icons/ArrowForward'
-import DialogActions from './components/DialogActions'
+import React, { forwardRef } from 'react'
+import { Dialog, Slide, useMediaQuery } from '@material-ui/core'
+import { useTheme } from '@material-ui/core/styles'
 import DialogContent from './components/DialogContent'
 import DialogTitle from './components/DialogTitle'
 import Stepper from './components/Stepper'
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="down" ref={ref} {...props} />
-})
+const Transition = forwardRef((props, ref) => <Slide direction="down" ref={ref} {...props} />)
 
-export default function OADialog({ open, setOpen }) {
+const OADialog = ({ open, setOpen }) => {
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
   const handleClose = () => {
     setOpen(false)
   }
@@ -22,11 +18,12 @@ export default function OADialog({ open, setOpen }) {
     <div>
       <Dialog
         onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+        aria-labelledby="dialog"
         open={open}
         TransitionComponent={Transition}
+        fullScreen={fullScreen}
       >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose} />
+        <DialogTitle id="dialog" onClose={handleClose} />
         <DialogContent>
           <Stepper />
         </DialogContent>
@@ -34,3 +31,5 @@ export default function OADialog({ open, setOpen }) {
     </div>
   )
 }
+
+export default OADialog

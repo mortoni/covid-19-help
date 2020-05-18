@@ -1,7 +1,3 @@
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
-
-const breakpoints = createBreakpoints({})
-
 export default {
   palette: {
     primary: {
@@ -19,9 +15,6 @@ export default {
       200: '#F5F5F5',
       900: '#424248',
     },
-  },
-  shape: {
-    borderRadius: 2,
   },
   typography: {
     fontFamily: [
