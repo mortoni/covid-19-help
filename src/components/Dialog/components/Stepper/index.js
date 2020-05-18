@@ -1,80 +1,14 @@
 import React, { useState } from 'react'
-import { withStyles, makeStyles } from '@material-ui/core/styles'
-import { Stepper, Step, StepLabel, StepConnector, Button, Grid, Box, Typography, TextField } from '@material-ui/core'
-import SettingsIcon from '@material-ui/icons/Settings'
-import GroupAddIcon from '@material-ui/icons/GroupAdd'
-import VideoLabelIcon from '@material-ui/icons/VideoLabel'
+import { makeStyles } from '@material-ui/core/styles'
+import { Stepper, Step, StepLabel, Button, Grid, Box, Typography, TextField } from '@material-ui/core'
+
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ArrowNextIcon from '@material-ui/icons/ArrowForward'
 import EmptyCheckboxIcon from '@material-ui/icons/CheckBoxOutlineBlank'
-import clsx from 'clsx'
+
 import { KeyboardDatePicker } from '@material-ui/pickers'
-import DateFnsUtils from '@date-io/date-fns'
-
-const useColorlibStepIconStyles = makeStyles({
-  root: {
-    backgroundColor: '#ccc',
-    zIndex: 1,
-    color: '#fff',
-    width: 50,
-    height: 50,
-    display: 'flex',
-    borderRadius: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  active: {
-    backgroundImage: 'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-    boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-  },
-  completed: {
-    backgroundImage: 'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-  },
-})
-
-const ColorlibConnector = withStyles({
-  alternativeLabel: {
-    top: 22,
-  },
-  active: {
-    '& $line': {
-      backgroundImage: 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-    },
-  },
-  completed: {
-    '& $line': {
-      backgroundImage: 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-    },
-  },
-  line: {
-    height: 3,
-    border: 0,
-    backgroundColor: '#eaeaf0',
-    borderRadius: 1,
-  },
-})(StepConnector)
-
-function ColorlibStepIcon(props) {
-  const classes = useColorlibStepIconStyles()
-  const { active, completed } = props
-
-  const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
-  }
-
-  return (
-    <div
-      className={clsx(classes.root, {
-        [classes.active]: active,
-        [classes.completed]: completed,
-      })}
-    >
-      {icons[String(props.icon)]}
-    </div>
-  )
-}
+import ColorlibConnector from './components/ColorlibConnector'
+import StepIcon from './components/StepIcon'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -198,7 +132,7 @@ const Step4 = () => {
 
       <KeyboardDatePicker
         disableToolbar
-        variant="outlined"
+        variant="inline"
         format="dd/MM/yyyy"
         margin="normal"
         id="date-picker-inline"
@@ -246,13 +180,13 @@ const OAStepper = () => {
           <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
             {steps.map((label) => (
               <Step key={label}>
-                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                <StepLabel StepIconComponent={StepIcon}>{label}</StepLabel>
               </Step>
             ))}
           </Stepper>
         </Grid>
         <Grid item xs={12}>
-          <Box my={2} mx={1} display="flex" justifyContent="center">
+          <Box my={2} mx={1} display="flex" justifyContent="center" minHeight={350}>
             {activeStep === 0 && <Step0 />}
             {activeStep === 1 && <Step1 />}
             {activeStep === 2 && <Step2 />}
