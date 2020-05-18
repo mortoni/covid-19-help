@@ -48,10 +48,16 @@ const OAStepper = () => {
           </Box>
         </Grid>
         <Grid container item xs={12} justify="space-around">
-          <Button autoFocus onClick={handleBack} color="primary" startIcon={<ArrowBackIcon />}>
+          <Button
+            autoFocus
+            onClick={handleBack}
+            color="primary"
+            startIcon={<ArrowBackIcon />}
+            disabled={activeStep <= 0}
+          >
             back
           </Button>
-          <Button autoFocus onClick={handleNext} color="primary" endIcon={<ArrowNextIcon />}>
+          <Button autoFocus onClick={handleNext} color="primary" endIcon={<ArrowNextIcon />} disabled={activeStep >= 4}>
             next
           </Button>
         </Grid>
