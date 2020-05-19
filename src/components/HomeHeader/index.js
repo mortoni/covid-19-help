@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuAppBar() {
   const classes = useStyles()
 
+  const handleLogin = () => {
+    // auth.signInWithPopup(provider)
+  }
+
   return (
     <>
       <AppBar position="static" color="transparent" elevation={0} className={classes.appBar}>
