@@ -4,6 +4,8 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { Button, Box } from '@material-ui/core'
 import OneAnother from '../../assets/oneAnother.png'
+import { navigate } from '@reach/router'
+import { ROUTES } from '../../routes'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -25,7 +27,7 @@ export default function MenuAppBar() {
   const classes = useStyles()
 
   const handleLogin = () => {
-    // auth.signInWithPopup(provider)
+    navigate(ROUTES.DASHBOARD)
   }
 
   return (
@@ -37,29 +39,29 @@ export default function MenuAppBar() {
           </Box>
 
           <Box display="flex" flexGrow={{ xs: 1, sm: 0 }}>
-            <Button className={classes.button} onClick={() => {}}>
+            <Button className={classes.button} onClick={() => navigate(ROUTES.ABOUT)}>
               About
             </Button>
 
-            <Button className={classes.button} onClick={() => {}}>
+            <Button className={classes.button} onClick={() => navigate(ROUTES.HOW)}>
               How does it work?
             </Button>
 
-            <Button className={classes.button} onClick={() => {}}>
+            <Button className={classes.button} onClick={() => navigate(ROUTES.STORIES)}>
               Stories
             </Button>
 
-            <Button className={classes.button} onClick={() => {}}>
+            <Button className={classes.button} onClick={() => navigate(ROUTES.FAQ)}>
               FAQ
             </Button>
 
             <Box mx={1}>
-              <Button variant="outlined" color="primary" onClick={() => {}}>
+              <Button variant="outlined" color="primary" onClick={() => navigate(ROUTES.SIGNUP)}>
                 Sign Up
               </Button>
             </Box>
 
-            <Button className={classes.button} onClick={() => {}}>
+            <Button className={classes.button} onClick={handleLogin}>
               Login
             </Button>
           </Box>

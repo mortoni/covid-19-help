@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     borderBottom: '1px solid #c4c4c4',
-    paddingBottom: theme.spacing(1),
   },
 }))
 export default function MenuAppBar() {

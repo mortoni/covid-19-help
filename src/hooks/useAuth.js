@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import { navigate } from '@reach/router'
-import { ROUTERS } from '../routers'
+import { ROUTES } from '../routes'
 import firebase from 'firebase/app'
 
 const provider = new firebase.auth.GoogleAuthProvider()
@@ -34,9 +34,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate(ROUTERS.DASHBOARD)
+      navigate(ROUTES.DASHBOARD)
     } else {
-      navigate(ROUTERS.LANDINGPAGE)
+      navigate(ROUTES.LANDINGPAGE)
     }
   }, [isAuthenticated])
 

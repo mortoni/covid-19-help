@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import UserIcon from '@material-ui/icons/PersonOutlineOutlined'
 import SettingIcon from '@material-ui/icons/SettingsOutlined'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
+import { navigate } from '@reach/router'
+import { ROUTES } from '../../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {},
@@ -37,7 +39,14 @@ const UserMenu = () => {
         <Box width={300} p={2}>
           <Box className={classes.profile}>{/* TODO */}</Box>
           <Box my={2}>
-            <Button variant="outlined" color="primary" className={classes.button} startIcon={<UserIcon />} fullWidth>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+              startIcon={<UserIcon />}
+              onClick={() => navigate(ROUTES.PROFILE)}
+              fullWidth
+            >
               My Profile
             </Button>
           </Box>

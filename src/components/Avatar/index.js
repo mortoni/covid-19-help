@@ -38,10 +38,14 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  avatar: {
+    width: ({ size }) => theme.spacing(size ? size : 5),
+    height: ({ size }) => theme.spacing(size ? size : 5),
+  },
 }))
 
-export default function BadgeAvatars() {
-  const classes = useStyles()
+export default function BadgeAvatars({ size }) {
+  const classes = useStyles({ size })
 
   return (
     <div className={classes.root}>
@@ -52,8 +56,11 @@ export default function BadgeAvatars() {
           horizontal: 'right',
         }}
         variant="dot"
+        className={classes.avatar}
       >
-        <Avatar alt="Alan Mortoni">AM</Avatar>
+        <Avatar alt="Alan Mortoni" className={classes.avatar}>
+          AM
+        </Avatar>
       </StyledBadge>
     </div>
   )
