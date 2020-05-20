@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
     "clsx": "^1.1.0",
     "date-fns": "^2.13.0",
     "dotenv": "^8.2.0",
@@ -21,7 +22,8 @@
     "react-dom": "^16.13.1",
     "react-firebase-hooks": "^2.1.1",
     "react-firebaseui": "^4.1.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-spinners": "^0.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,5 +45,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://us-central1-one-another-dev.cloudfunctions.net/api"
 }

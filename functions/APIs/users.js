@@ -1,5 +1,6 @@
 const { admin, db } = require('../util/admin')
 const config = require('../util/config')
+
 const firebase = require('firebase')
 
 firebase.initializeApp(config)
@@ -18,7 +19,7 @@ exports.loginUser = (request, response) => {
 
   firebase
     .auth()
-    .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    .signInWithEmailAndPassword(user.email, user.password)
     .then((data) => {
       return data.user.getIdToken()
     })

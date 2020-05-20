@@ -51,5 +51,10 @@ export default {
         borderRadius: 16,
       },
     },
+    MuiOutlinedInput: {
+      notchedOutline: {
+        borderRadius: 16,
+      },
+    },
   },
 }
