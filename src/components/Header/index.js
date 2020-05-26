@@ -3,8 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import { IconButton, Button, Box } from '@material-ui/core'
-import NotesIcon from '@material-ui/icons/Notes'
+import { Button, Box } from '@material-ui/core'
 import CreateIcon from '@material-ui/icons/Create'
 import Logo from '../../assets/logo.png'
 import OneAnother from '../../assets/oneAnother.png'
@@ -12,6 +11,7 @@ import Dialog from '../Dialog'
 import Notifications from './components/Notification'
 import Messages from './components/Messages'
 import UserMenu from './components/UserMenu'
+import Notes from './components/Notes'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -19,6 +19,11 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     borderBottom: '1px solid #c4c4c4',
+  },
+  button: {
+    color: theme.palette.text.secondary,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
 }))
 export default function MenuAppBar() {
@@ -35,7 +40,7 @@ export default function MenuAppBar() {
             <Typography variant="body1">Dashboard</Typography>
           </Box>
 
-          <Box display="flex" flexGrow={1}>
+          <Box display={'flex'} flexGrow={1}>
             <img src={OneAnother} alt="Logo" width={68} height={64} />
           </Box>
 
@@ -52,17 +57,8 @@ export default function MenuAppBar() {
           </Box>
 
           <Box display={{ xs: 'none', sm: 'flex' }}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="primary"
-            >
-              <NotesIcon style={{ fontSize: 30 }} />
-            </IconButton>
-
+            <Notes />
             <Notifications />
-
             <Messages />
           </Box>
 

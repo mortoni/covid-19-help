@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, Container, Grid, Typography } from '@material-ui/core'
-import HomeHeader from '../../components/HomeHeader'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 import { navigate } from '@reach/router'
-import { ROUTES } from '../../routes'
+import { AUTHENTICATED_ROUTES } from '../../routes'
 import Loader from 'react-spinners/ClimbingBoxLoader'
+import Background from '../../assets/signupb.png'
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -44,7 +44,7 @@ const SignupPage = () => {
       .then((response) => {
         localStorage.setItem('AuthToken', `${response.data.token}`)
         setLoading(false)
-        navigate(ROUTES.DASHBOARD)
+        navigate(AUTHENTICATED_ROUTES.DASHBOARD)
       })
       .catch((error) => {
         setErrors(true)
@@ -53,7 +53,9 @@ const SignupPage = () => {
 
   return (
     <>
-      <HomeHeader />
+      <Box>
+        <img src={Background} alt="Logo" />
+      </Box>
 
       <Box mt={3}>
         <Container maxWidth="sm" component="main">

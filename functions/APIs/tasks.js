@@ -2,6 +2,7 @@ const { db } = require('../util/admin')
 
 exports.getAllTasks = (request, response) => {
   db.collection('tasks')
+    .where('username', '==', request.user.username)
     .orderBy('createdAt', 'desc')
     .get()
     .then((data) => {
@@ -34,6 +35,7 @@ exports.createTask = (request, response) => {
   const newTodoItem = {
     title: request.body.title,
     body: request.body.body,
+    username: request.user.username,
     createdAt: new Date().toISOString(),
   }
   db.collection('todos')

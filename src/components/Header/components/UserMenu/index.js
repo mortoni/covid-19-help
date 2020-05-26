@@ -6,7 +6,7 @@ import UserIcon from '@material-ui/icons/PersonOutlineOutlined'
 import SettingIcon from '@material-ui/icons/SettingsOutlined'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 import { navigate } from '@reach/router'
-import { ROUTES } from '../../../../routes'
+import { AUTHENTICATED_ROUTES } from '../../../../routes'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {},
@@ -44,7 +44,7 @@ const UserMenu = () => {
               color="primary"
               className={classes.button}
               startIcon={<UserIcon />}
-              onClick={() => navigate(ROUTES.PROFILE)}
+              onClick={() => navigate(AUTHENTICATED_ROUTES.PROFILE)}
               fullWidth
             >
               My Profile

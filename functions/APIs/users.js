@@ -169,7 +169,7 @@ exports.getUserDetail = (request, response) => {
     })
     .catch((error) => {
       console.error(error)
-      return response.status(500).json({ error: error.code })
+      return response.status(500).json({ error: 'fi de puta' })
     })
 }
 

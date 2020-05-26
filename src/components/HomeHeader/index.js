@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import { Button, Box, IconButton } from '@material-ui/core'
 import OneAnother from '../../assets/oneAnother.png'
 import { navigate } from '@reach/router'
-import { ROUTES } from '../../routes'
+import { UNATHENTICATED_ROUTES } from '../../routes'
 import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined'
 
 const useStyles = makeStyles((theme) => ({
@@ -37,29 +37,29 @@ export default function MenuAppBar() {
 
           <Box display="flex" flexGrow={{ xs: 1, sm: 0 }} justifyContent={{ xs: 'flex-end' }} alignItems="center">
             <Box display={{ xs: 'none', md: 'block' }}>
-              <Button className={classes.button} onClick={() => navigate(ROUTES.ABOUT)}>
+              <Button className={classes.button} onClick={() => navigate(UNATHENTICATED_ROUTES.ABOUT)}>
                 About
               </Button>
 
-              <Button className={classes.button} onClick={() => navigate(ROUTES.HOW)}>
+              <Button className={classes.button} onClick={() => navigate(UNATHENTICATED_ROUTES.HOW)}>
                 How does it work?
               </Button>
 
-              <Button className={classes.button} onClick={() => navigate(ROUTES.STORIES)}>
+              <Button className={classes.button} onClick={() => navigate(UNATHENTICATED_ROUTES.STORIES)}>
                 Stories
               </Button>
 
-              <Button className={classes.button} onClick={() => navigate(ROUTES.FAQ)}>
+              <Button className={classes.button} onClick={() => navigate(UNATHENTICATED_ROUTES.FAQ)}>
                 FAQ
               </Button>
             </Box>
             <Box mx={0.5}>
-              <Button variant="outlined" color="primary" onClick={() => navigate(ROUTES.SIGNUP)}>
+              <Button variant="outlined" color="primary" onClick={() => navigate(UNATHENTICATED_ROUTES.SIGNUP)}>
                 Sign Up
               </Button>
             </Box>
             <Box mx={0.5}>
-              <Button className={classes.button} onClick={() => navigate(ROUTES.LOGIN)}>
+              <Button className={classes.button} onClick={() => navigate(UNATHENTICATED_ROUTES.LOGIN)}>
                 Login
               </Button>
             </Box>

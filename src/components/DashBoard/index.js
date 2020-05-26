@@ -5,8 +5,6 @@ import MapIcon from '@material-ui/icons/Map'
 import TuneIcon from '@material-ui/icons/Tune'
 import TabPanel from './components/TabPanel'
 import TaskTile from '../TaskTile'
-import Header from '../Header'
-import OAMap from '../OAMap'
 
 function a11yProps(index) {
   return {
@@ -42,7 +40,6 @@ function Dashboard() {
 
   return (
     <Box>
-      <Header />
       <Box mt={4}>
         <Container maxWidth={showMap ? 'xl' : 'md'} disableGutters>
           <Box display="flex" justifyContent="space-between" flexDirection={{ xs: 'column-reverse', sm: 'row' }}>
