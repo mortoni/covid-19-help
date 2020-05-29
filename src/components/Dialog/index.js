@@ -22,6 +22,7 @@ const OADialog = ({ open, setOpen }) => {
         open={open}
         TransitionComponent={Transition}
         fullScreen={fullScreen}
+        maxWidth="xs"
       >
         <DialogTitle id="dialog" onClose={handleClose} />
         <DialogContent>

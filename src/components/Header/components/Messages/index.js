@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
-import { Popover, Typography, IconButton, Grid, Box } from '@material-ui/core'
+import { Popover, Typography, IconButton, Grid, Box, SvgIcon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import SmsIcon from '@material-ui/icons/Sms'
 import MessageTile from './MessageTile'
+import { ReactComponent as MessageIcon } from '../../../../assets/icons/message-icon.svg'
 
 const useStyles = makeStyles((theme) => ({
   popover: {},
   paper: {},
+  button: {
+    color: 'transparent',
+  },
 }))
 const Notifications = () => {
   const classes = useStyles()
@@ -28,10 +31,10 @@ const Notifications = () => {
         aria-label="account of current user"
         aria-controls="menu-appbar"
         aria-haspopup="true"
-        color={open ? 'secondary' : 'primary'}
+        className={classes.button}
         onClick={handleClick}
       >
-        <SmsIcon style={{ fontSize: 30 }} />
+        <SvgIcon component={MessageIcon} style={{ fontSize: 30, marginTop: 4 }} />
       </IconButton>
       <Popover
         classes={{ root: classes.popover }}

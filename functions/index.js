@@ -5,7 +5,7 @@ const { getAllTasks, createTask } = require('./APIs/tasks')
 const { loginUser, signUpUser, uploadProfilePhoto, getUserDetail } = require('./APIs/users')
 const auth = require('./util/auth')
 
-app.get('/tasks', auth, getAllTasks)
+app.get('/tasks', getAllTasks)
 app.post('/createTask', auth, createTask)
 app.post('/signup', signUpUser)
 app.post('/login', loginUser)

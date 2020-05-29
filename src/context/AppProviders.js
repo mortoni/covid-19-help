@@ -6,6 +6,3 @@ function AppProviders({ children }) {
 }
 
 export default AppProviders
-
-// {/* </AuthProvider> */}
-// <AuthProvider>

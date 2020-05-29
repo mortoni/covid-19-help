@@ -25,7 +25,7 @@ async function client(endpoint, { data, headers: customHeaders, ...customConfig 
       return Promise.reject({ message: 'Please re-authenticate.' })
     }
 
-    if (response.status === 200 || response.statusText === 'OK') {
+    if (response.status === 200 || response.status === 201) {
       return response.data
     } else {
       return Promise.reject(data)

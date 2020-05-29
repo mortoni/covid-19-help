@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Popover, Typography, IconButton, Grid, Box } from '@material-ui/core'
-import NotificationIcon from '@material-ui/icons/Notifications'
 import { makeStyles } from '@material-ui/core/styles'
 import NotificationTile from './NotificationTile'
+import { ReactComponent as NotificationIcon } from '../../../../assets/icons/notification-icon.svg'
 
 const useStyles = makeStyles((theme) => ({
   popover: {},
@@ -31,7 +31,7 @@ const Notifications = () => {
         color={open ? 'secondary' : 'primary'}
         onClick={handleClick}
       >
-        <NotificationIcon style={{ fontSize: 30 }} />
+        <NotificationIcon style={{ fontSize: 30, marginTop: 4 }} />
       </IconButton>
       <Popover
         classes={{ root: classes.popover }}

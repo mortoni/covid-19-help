@@ -4,14 +4,13 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { Button, Box } from '@material-ui/core'
-import CreateIcon from '@material-ui/icons/Create'
 import Logo from '../../assets/logo.png'
 import OneAnother from '../../assets/oneAnother.png'
 import Dialog from '../Dialog'
 import Notifications from './components/Notification'
 import Messages from './components/Messages'
 import UserMenu from './components/UserMenu'
-import Notes from './components/Notes'
+import { ReactComponent as PenIcon } from '../../assets/icons/pen-icon.svg'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -21,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid #c4c4c4',
   },
   button: {
-    color: theme.palette.text.secondary,
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
@@ -49,7 +47,7 @@ export default function MenuAppBar() {
               variant="contained"
               color="primary"
               className={classes.button}
-              startIcon={<CreateIcon />}
+              startIcon={<PenIcon />}
               onClick={() => !openPost && setPost(true)}
             >
               Post
@@ -57,7 +55,6 @@ export default function MenuAppBar() {
           </Box>
 
           <Box display={{ xs: 'none', sm: 'flex' }}>
-            <Notes />
             <Notifications />
             <Messages />
           </Box>

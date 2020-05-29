@@ -1,10 +1,5 @@
 import { client, localStorageKey } from './api-client'
 
-function handleUserResponse({ user: { token, ...user } }) {
-  // TODO remove
-  return user
-}
-
 function handleTokenResponse({ token }) {
   window.localStorage.setItem(localStorageKey, token)
 }
@@ -24,8 +19,14 @@ function login({ email, password }) {
     .then(({ userCredentials }) => userCredentials)
 }
 
-function register({ username, password }) {
-  return client('signup', { data: { username, password } }).then(handleUserResponse)
+function register({ firstName, lastName, username, email, phoneNumber, address, password, confirmPassword }) {
+  debugger
+  return client('signup', {
+    data: { firstName, lastName, username, email, phoneNumber, address, password, confirmPassword },
+  })
+    .then(handleTokenResponse)
+    .then(() => client('user'))
+    .then(({ userCredentials }) => userCredentials)
 }
 
 function getToken() {

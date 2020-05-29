@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function BadgeAvatars({ size }) {
+export default function BadgeAvatars({ size, children }) {
   const classes = useStyles({ size })
 
   return (
@@ -59,7 +59,7 @@ export default function BadgeAvatars({ size }) {
         className={classes.avatar}
       >
         <Avatar alt="Alan Mortoni" className={classes.avatar}>
-          AM
+          {children ? children : 'DF'}
         </Avatar>
       </StyledBadge>
     </div>

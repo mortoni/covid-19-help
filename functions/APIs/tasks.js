@@ -2,16 +2,17 @@ const { db } = require('../util/admin')
 
 exports.getAllTasks = (request, response) => {
   db.collection('tasks')
-    .where('username', '==', request.user.username)
     .orderBy('createdAt', 'desc')
     .get()
     .then((data) => {
       let todos = []
       data.forEach((doc) => {
         todos.push({
-          todoId: doc.id,
-          title: doc.data().title,
-          body: doc.data().body,
+          taskId: doc.id,
+          address: doc.data().address,
+          name: doc.data().name,
+          username: doc.data().username,
+          description: doc.data().description,
           createdAt: doc.data().createdAt,
         })
       })
@@ -24,26 +25,23 @@ exports.getAllTasks = (request, response) => {
 }
 
 exports.createTask = (request, response) => {
-  if (request.body.body.trim() === '') {
-    return response.status(400).json({ body: 'Must not be empty' })
+  if (!request.user.username) {
+    return response.status(400).json({ body: 'username Must not be empty' })
   }
 
-  if (request.body.title.trim() === '') {
-    return response.status(400).json({ title: 'Must not be empty' })
-  }
-
-  const newTodoItem = {
-    title: request.body.title,
-    body: request.body.body,
+  const newTask = {
+    name: request.body.name,
+    description: request.body.description,
+    address: request.body.address,
     username: request.user.username,
     createdAt: new Date().toISOString(),
   }
-  db.collection('todos')
-    .add(newTodoItem)
+  db.collection('tasks')
+    .add(newTask)
     .then((doc) => {
-      const responseTodoItem = newTodoItem
-      responseTodoItem.id = doc.id
-      return response.json(responseTodoItem)
+      const responseTaskItem = newTask
+      responseTaskItem.id = doc.id
+      return response.json(responseTaskItem)
     })
     .catch((err) => {
       response.status(500).json({ error: 'Something went wrong' })

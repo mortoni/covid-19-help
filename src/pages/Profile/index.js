@@ -1,6 +1,5 @@
 import React from 'react'
-import { Typography, Box, Grid } from '@material-ui/core'
-import Header from '../../components/Header'
+import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Avatar from '../../components/Avatar'
 import Location from './components/Location'
@@ -35,7 +34,6 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Header />
       <Box className={classes.content}>
         <Box display="flex" flexGrow={1}>
           <Box className={classes.avatar} position="absolute">

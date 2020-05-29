@@ -7,6 +7,7 @@ import SettingIcon from '@material-ui/icons/SettingsOutlined'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 import { navigate } from '@reach/router'
 import { AUTHENTICATED_ROUTES } from '../../../../routes'
+import { useAuth } from '../../../../context/auth-context'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {},
@@ -21,8 +22,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 const UserMenu = () => {
+  const { user, logout } = useAuth()
   const classes = useStyles()
   const [open, toggleDrawer] = useState(false)
+
+  const getInitials = () => `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`
+
+  const handleLogout = (event) => {
+    event.preventDefault()
+    logout()
+  }
+
+  function goToProfile(event) {
+    toggleDrawer(false)
+    navigate(AUTHENTICATED_ROUTES.PROFILE)
+  }
+
   return (
     <>
       <IconButton
@@ -32,7 +47,7 @@ const UserMenu = () => {
         color="primary"
         onClick={() => toggleDrawer(true)}
       >
-        <Avatar />
+        <Avatar>{getInitials()}</Avatar>
       </IconButton>
 
       <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)}>
@@ -44,7 +59,7 @@ const UserMenu = () => {
               color="primary"
               className={classes.button}
               startIcon={<UserIcon />}
-              onClick={() => navigate(AUTHENTICATED_ROUTES.PROFILE)}
+              onClick={goToProfile}
               fullWidth
             >
               My Profile
@@ -56,7 +71,13 @@ const UserMenu = () => {
             </Button>
           </Box>
           <Box my={2}>
-            <Button color="secondary" className={classes.button} startIcon={<LogoutIcon />} fullWidth>
+            <Button
+              color="secondary"
+              className={classes.button}
+              startIcon={<LogoutIcon />}
+              fullWidth
+              onClick={handleLogout}
+            >
               Logout
             </Button>
           </Box>

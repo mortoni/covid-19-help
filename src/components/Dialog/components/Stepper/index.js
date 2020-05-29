@@ -1,65 +1,106 @@
 import React, { useState, createElement } from 'react'
-import { Stepper, Step, StepLabel, Button, Grid, Box, useMediaQuery } from '@material-ui/core'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import ArrowNextIcon from '@material-ui/icons/ArrowForward'
-import { useTheme } from '@material-ui/core/styles'
-import ColorlibConnector from './components/ColorlibConnector'
-import StepIcon from './components/StepIcon'
-import TaskType from './TaskType'
-import TaskSituation from './TaskSituation'
-import TaskSelection from './TaskSelection'
-import TaskNotes from './TaskNotes'
-import TaskDate from './TaskDate'
+import { Stepper, Step, StepLabel, Button, Grid, Box, TextField, Typography } from '@material-ui/core'
+import { navigate } from '@reach/router'
+import { useAsync } from '../../../../utils/use-async'
+import { createTask } from '../../../../utils/task-client'
+import { useAuth } from '../../../../context/auth-context'
+import { AUTHENTICATED_ROUTES } from '../../../../routes'
 
 const OAStepper = () => {
-  const theme = useTheme()
-  const isSmall = useMediaQuery(theme.breakpoints.down('sm'))
-  const steps = [
-    { label: 'Type', component: TaskType },
-    { label: 'Situation', component: TaskSituation },
-    { label: 'Task', component: TaskSelection },
-    { label: 'Notes', component: TaskNotes },
-    { label: 'When', component: TaskDate },
-  ]
-  const [activeStep, setActiveStep] = useState(0)
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  const { user } = useAuth()
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [hasSubmitted, setSubmitted] = useState(false)
+  const { isLoading, isError, error, run } = useAsync()
+
+  function handleNameChange(e) {
+    if (e.target.value.length <= 25) {
+      setName(e.target.value)
+    }
   }
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  function handleDescriptionChange(e) {
+    setDescription(e.target.value)
+  }
+
+  function handlePostTask(e) {
+    e.preventDefault()
+    setSubmitted(true)
+    run(createTask({ name, description, address: user.address }))
   }
 
   return (
     <>
-      <Grid container>
-        <Grid item xs={12}>
-          <Stepper alternativeLabel activeStep={activeStep} connector={isSmall ? null : <ColorlibConnector />}>
-            {steps.map(({ label }) => (
-              <Step key={label}>
-                <StepLabel StepIconComponent={StepIcon}>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-        </Grid>
-        <Grid item xs={12}>
-          <Box my={2} mx={1} display="flex" justifyContent="center" minHeight={350}>
-            {createElement(steps[activeStep].component, {})}
+      <Grid container spacing={2}>
+        <Grid container item xs={12} justify="center">
+          <Typography variant="h5"> Post a task</Typography>
+
+          <Box my={2} textAlign="center">
+            <Typography variant="body1">
+              Name and describe your task so that your good neighbours can help you.
+            </Typography>
           </Box>
         </Grid>
+        <Grid item xs={12}>
+          {!hasSubmitted && !isLoading ? (
+            <form noValidate autoComplete="off">
+              <Grid container spacing={4}>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Name of task"
+                    variant="outlined"
+                    fullWidth
+                    value={name}
+                    onChange={handleNameChange}
+                    helperText={
+                      <Box display="flex" justifyContent="flex-end">
+                        <Typography>{`${name.length}/ 25 characters`}</Typography>
+                      </Box>
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Describe your task here"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    fullWidth
+                    value={description}
+                    onChange={handleDescriptionChange}
+                  />
+                </Grid>
+              </Grid>
+            </form>
+          ) : (
+            <Box display="flex" flexDirection="column">
+              icon
+              <Box my={2}>
+                <Typography variant="h5">Your task has been published!</Typography>
+              </Box>
+              <Typography variant="body2">We have let them know. Thanks for the kind offer!</Typography>
+            </Box>
+          )}
+        </Grid>
         <Grid container item xs={12} justify="space-around">
-          <Button
-            autoFocus
-            onClick={handleBack}
-            color="primary"
-            startIcon={<ArrowBackIcon />}
-            disabled={activeStep <= 0}
-          >
-            back
-          </Button>
-          <Button autoFocus onClick={handleNext} color="primary" endIcon={<ArrowNextIcon />} disabled={activeStep >= 4}>
-            next
-          </Button>
+          <Box my={2} mx={5} display="flex" flexGrow={1}>
+            {!hasSubmitted && !isLoading ? (
+              <Button variant="contained" color="primary" fullWidth onClick={handlePostTask}>
+                Post my task
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={() => navigate(AUTHENTICATED_ROUTES.DASHBOARD)}
+              >
+                Back to dashboard
+              </Button>
+            )}
+          </Box>
         </Grid>
       </Grid>
     </>

@@ -1,4 +1,5 @@
 import * as auth from './auth-client'
+import * as task from './task-client'
 
 async function bootstrapAppData() {
   let appData = { user: null }
