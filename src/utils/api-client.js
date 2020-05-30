@@ -8,7 +8,7 @@ async function client(endpoint, { data, headers: customHeaders, ...customConfig 
 
   const config = {
     method: data ? 'POST' : 'GET',
-    url: `/${endpoint}`,
+    url: `https://us-central1-one-another-dev.cloudfunctions.net/api/${endpoint}`,
     data: data ? data : undefined,
     headers: {
       Authorization: token ? `Bearer ${token}` : undefined,

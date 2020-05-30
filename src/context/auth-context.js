@@ -12,7 +12,7 @@ const AuthContext = React.createContext()
 AuthContext.displayName = 'AuthContext'
 
 function AuthProvider(props) {
-  const { data, status, error, isLoading, isIdle, isError, isSuccess, run, setData } = useAsync()
+  const { data, status, isLoading, isIdle, isError, isSuccess, run, setData } = useAsync()
 
   React.useLayoutEffect(() => {
     run(bootstrapAppData())

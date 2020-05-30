@@ -24,11 +24,11 @@ exports.loginUser = (request, response) => {
       return data.user.getIdToken()
     })
     .then((token) => {
-      return response.json({ token })
+      return response.set({ 'Access-Control-Allow-Origin': '*' }).json({ token })
     })
     .catch((error) => {
       console.error(error)
-      return response.status(403).json({
+      return response.status(403).set({ 'Access-Control-Allow-Origin': '*' }).json({
         general: 'wrong credentials, please try again',
       })
     })
@@ -49,14 +49,17 @@ exports.signUpUser = (request, response) => {
 
   const { valid, errors } = validateSignUpData(newUser)
 
-  if (!valid) return response.status(400).json(errors)
+  if (!valid) return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json(errors)
 
   let token, userId
   db.doc(`/users/${newUser.username}`)
     .get()
     .then((doc) => {
       if (doc.exists) {
-        return response.status(400).json({ username: 'this username is already taken' })
+        return response
+          .set({ 'Access-Control-Allow-Origin': '*' })
+          .status(400)
+          .json({ username: 'this username is already taken' })
       } else {
         return firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
       }
@@ -80,14 +83,17 @@ exports.signUpUser = (request, response) => {
       return db.doc(`/users/${newUser.username}`).set(userCredentials)
     })
     .then(() => {
-      return response.status(201).json({ token })
+      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(201).json({ token })
     })
     .catch((err) => {
       console.error(err)
       if (err.code === 'auth/email-already-in-use') {
-        return response.status(400).json({ email: 'Email already in use' })
+        return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json({ email: 'Email already in use' })
       } else {
-        return response.status(500).json({ general: 'Something went wrong, please try again' })
+        return response
+          .set({ 'Access-Control-Allow-Origin': '*' })
+          .status(500)
+          .json({ general: 'Something went wrong, please try again', err })
       }
     })
 }
@@ -119,7 +125,10 @@ exports.uploadProfilePhoto = (request, response) => {
 
   busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
     if (mimetype !== 'image/png' && mimetype !== 'image/jpeg') {
-      return response.status(400).json({ error: 'Wrong file type submited' })
+      return response
+        .set({ 'Access-Control-Allow-Origin': '*' })
+        .status(400)
+        .json({ error: 'Wrong file type submited' })
     }
     const imageExtension = filename.split('.')[filename.split('.').length - 1]
     imageFileName = `${request.user.username}.${imageExtension}`
@@ -147,11 +156,11 @@ exports.uploadProfilePhoto = (request, response) => {
         })
       })
       .then(() => {
-        return response.json({ message: 'Image uploaded successfully' })
+        return response.set({ 'Access-Control-Allow-Origin': '*' }).json({ message: 'Image uploaded successfully' })
       })
       .catch((error) => {
         console.error(error)
-        return response.status(500).json({ error: error.code })
+        return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: error.code })
       })
   })
   busboy.end(request.rawBody)
@@ -164,12 +173,19 @@ exports.getUserDetail = (request, response) => {
     .then((doc) => {
       if (doc.exists) {
         userData.userCredentials = doc.data()
-        return response.json(userData)
+        return response
+          .set({ 'Access-Control-Allow-Origin': '*' })
+          .set({ 'Access-Control-Allow-Origin': '*' })
+          .json(userData)
       }
     })
     .catch((error) => {
       console.error(error)
-      return response.status(500).json({ error: 'fi de puta' })
+      return response
+        .set({ 'Access-Control-Allow-Origin': '*' })
+        .status(500)
+        .set({ 'Access-Control-Allow-Origin': '*' })
+        .json({ error: 'error to fetch user' })
     })
 }
 
@@ -178,11 +194,11 @@ exports.updateUserDetails = (request, response) => {
   document
     .update(request.body)
     .then(() => {
-      response.json({ message: 'Updated successfully' })
+      response.set({ 'Access-Control-Allow-Origin': '*' }).json({ message: 'Updated successfully' })
     })
     .catch((error) => {
       console.error(error)
-      return response.status(500).json({
+      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({
         message: 'Cannot Update the value',
       })
     })

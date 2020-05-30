@@ -17,7 +17,7 @@ const palette = {
     400: '#CECECE',
     500: '#BFBFBF',
     600: '#ACACAC',
-    700: '#8A8A8A',
+    700: '#979797',
     800: '#616161',
     900: '#424242',
   },
@@ -55,6 +55,10 @@ export default {
       },
     },
     MuiOutlinedInput: {
+      root: {
+        backgroundColor: 'white',
+        borderRadius: 16,
+      },
       notchedOutline: {
         borderRadius: 16,
       },
@@ -64,6 +68,11 @@ export default {
         backgroundColor: palette.secondary.main,
         height: 4,
         borderRadius: 4,
+      },
+    },
+    MuiAvatar: {
+      colorDefault: {
+        backgroundColor: '#494949',
       },
     },
   },

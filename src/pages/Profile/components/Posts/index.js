@@ -32,8 +32,6 @@ const Card = () => {
   )
 }
 const Posts = () => {
-  const classes = useStyles()
-
   return (
     <Box display="flex" height="100%" alignItems="center" justifyContent="center">
       <Card />

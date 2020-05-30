@@ -1,5 +1,5 @@
-import React, { useState, createElement } from 'react'
-import { Stepper, Step, StepLabel, Button, Grid, Box, TextField, Typography } from '@material-ui/core'
+import React, { useState } from 'react'
+import { Button, Grid, Box, TextField, Typography } from '@material-ui/core'
 import { navigate } from '@reach/router'
 import { useAsync } from '../../../../utils/use-async'
 import { createTask } from '../../../../utils/task-client'
@@ -11,7 +11,7 @@ const OAStepper = () => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [hasSubmitted, setSubmitted] = useState(false)
-  const { isLoading, isError, error, run } = useAsync()
+  const { isLoading, run } = useAsync()
 
   function handleNameChange(e) {
     if (e.target.value.length <= 25) {

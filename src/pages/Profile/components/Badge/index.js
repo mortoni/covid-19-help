@@ -1,6 +1,5 @@
 import React from 'react'
 import { Typography, Box, Chip } from '@material-ui/core'
-import InfoIcon from '@material-ui/icons/InfoOutlined'
 import Logo from '../../../../assets/logo.png'
 import { makeStyles } from '@material-ui/core/styles'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'

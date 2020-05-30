@@ -1,6 +1,5 @@
 import React from 'react'
 import { Typography, Box } from '@material-ui/core'
-import LocationIcon from '@material-ui/icons/LocationOnOutlined'
 
 const Information = () => {
   return (

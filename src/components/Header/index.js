@@ -33,9 +33,11 @@ export default function MenuAppBar() {
       <AppBar position="static" color="transparent" elevation={0} className={classes.appBar}>
         <Toolbar>
           <Box display={{ xs: 'none', md: 'flex' }} flexDirection="column" flexGrow={1}>
-            <img src={Logo} alt="Logo" width={32} height={32} />
+            <Box alignSelf="flex-start" display="flex" flexDirection="column" alignItems="center">
+              <img src={Logo} alt="Logo" width={32} height={32} />
 
-            <Typography variant="body1">Dashboard</Typography>
+              <Typography variant="body1">Dashboard</Typography>
+            </Box>
           </Box>
 
           <Box display={'flex'} flexGrow={1}>

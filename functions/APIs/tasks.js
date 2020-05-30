@@ -16,17 +16,17 @@ exports.getAllTasks = (request, response) => {
           createdAt: doc.data().createdAt,
         })
       })
-      return response.json(todos)
+      return response.set({ 'Access-Control-Allow-Origin': '*' }).json(todos)
     })
     .catch((err) => {
       console.error(err)
-      return response.status(500).json({ error: err.code })
+      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: err.code })
     })
 }
 
 exports.createTask = (request, response) => {
   if (!request.user.username) {
-    return response.status(400).json({ body: 'username Must not be empty' })
+    return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json({ body: 'username Must not be empty' })
   }
 
   const newTask = {
@@ -41,10 +41,10 @@ exports.createTask = (request, response) => {
     .then((doc) => {
       const responseTaskItem = newTask
       responseTaskItem.id = doc.id
-      return response.json(responseTaskItem)
+      return response.set({ 'Access-Control-Allow-Origin': '*' }).json(responseTaskItem)
     })
     .catch((err) => {
-      response.status(500).json({ error: 'Something went wrong' })
+      response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'Something went wrong' })
       console.error(err)
     })
 }
