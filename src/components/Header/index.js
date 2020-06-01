@@ -11,6 +11,7 @@ import Notifications from './components/Notification'
 import Messages from './components/Messages'
 import UserMenu from './components/UserMenu'
 import { ReactComponent as PenIcon } from '../../assets/icons/pen-icon.svg'
+import CreateTask from '../forms/CreateTask'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -65,7 +66,9 @@ export default function MenuAppBar() {
         </Toolbar>
       </AppBar>
 
-      <Dialog open={openPost} setOpen={setPost} />
+      <Dialog open={openPost} setOpen={setPost}>
+        <CreateTask handleClose={() => setPost(false)} />
+      </Dialog>
     </>
   )
 }

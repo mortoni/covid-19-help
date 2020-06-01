@@ -8,4 +8,8 @@ function getTasks() {
   return client('tasks').then((tasks) => tasks)
 }
 
-export { createTask, getTasks }
+function addOffer({ taskId, user, message }) {
+  return client(`task/${taskId}/addOffer`, { data: { user, message }, method: 'PUT' }).then((offer) => offer)
+}
+
+export { createTask, getTasks, addOffer }

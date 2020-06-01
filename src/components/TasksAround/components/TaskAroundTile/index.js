@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import Avatar from '../../../Avatar'
 import { TasksContext } from '../../../../context/task-context'
+import Dialog from '../../../Dialog'
+import OfferToHelp from '../OfferToHelp'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,13 +27,20 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
 }))
-const TaskAroundTile = ({ address, name, username, id, handleTaskOnHover }) => {
+const TaskAroundTile = ({ createdAt, description, address, name, username, id }) => {
   const classes = useStyles()
-  const { dispatch } = React.useContext(TasksContext)
+  const { tasks, dispatch } = React.useContext(TasksContext)
+  const [open, setOpen] = React.useState(false)
+
+  function handleSelect() {
+    dispatch({ type: 'selectTask', value: { createdAt, description, name, username, id } })
+    setOpen(true)
+  }
 
   return (
     <Box mt={2}>
       <Paper
+        onClick={() => handleSelect()}
         className={classes.paper}
         elevation={0}
         onMouseEnter={() => dispatch({ type: 'hover', value: id })}
@@ -52,6 +61,10 @@ const TaskAroundTile = ({ address, name, username, id, handleTaskOnHover }) => {
           </Box>
         </Box>
       </Paper>
+      {/* TODO this dialog should be on root with a context for it */}
+      <Dialog open={open} setOpen={setOpen}>
+        <OfferToHelp />
+      </Dialog>
     </Box>
   )
 }

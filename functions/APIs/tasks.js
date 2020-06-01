@@ -1,4 +1,4 @@
-const { db } = require('../util/admin')
+const { db, admin } = require('../util/admin')
 
 exports.getAllTasks = (request, response) => {
   db.collection('tasks')
@@ -46,5 +46,28 @@ exports.createTask = (request, response) => {
     .catch((err) => {
       response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'Something went wrong' })
       console.error(err)
+    })
+}
+
+exports.addOffer = (request, response) => {
+  let taskRef = db.collection('tasks').doc(`${request.params.taskId}`)
+
+  taskRef
+    .update({
+      offers: admin.firestore.FieldValue.arrayUnion({
+        ...request.body,
+        status: 'pending',
+        read: false,
+        createdAt: new Date().toISOString(),
+      }),
+    })
+    .then(() => {
+      response.json({ message: 'Updated successfully' })
+    })
+    .catch((err) => {
+      console.error(err)
+      return response.status(500).json({
+        error: err.code,
+      })
     })
 }

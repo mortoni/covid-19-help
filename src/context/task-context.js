@@ -3,6 +3,8 @@ import React, { createContext, useReducer } from 'react'
 
 const initialState = {
   onHover: null,
+  selected: {},
+  offerDialog: false,
 }
 
 const TasksContext = createContext(initialState)
@@ -13,7 +15,16 @@ const tasksReducer = (state, { type, value }) => {
         ...state,
         onHover: value,
       }
-
+    case 'selectTask':
+      return {
+        ...state,
+        selected: value,
+      }
+    case 'openOfferDialog':
+      return {
+        ...state,
+        offerDialog: true,
+      }
     default:
       return state
   }

@@ -1,10 +1,9 @@
 import React from 'react'
-import { useAuth } from '../../context/auth-context'
-import { db } from '../../firebase'
 import TaskTile from '../TaskTile'
 import { Box, Typography } from '@material-ui/core'
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 import { makeStyles } from '@material-ui/core/styles'
+import useUserActivities from '../../utils/use-user-activities'
 
 const useStyles = makeStyles((theme) => ({
   label: {
@@ -14,41 +13,30 @@ const useStyles = makeStyles((theme) => ({
 }))
 const UserActivities = () => {
   const classes = useStyles()
-  const { user } = useAuth()
-  const [tasks, setTasks] = React.useState([])
   const [acceptedTasks, setAcceptedTasks] = React.useState([])
-  // TODO move this logic to a hook
-  React.useEffect(() => {
-    db.collection('tasks')
-      .where('username', '==', user.username)
-      .get()
-      .then((response) => {
-        const all = []
-        response.forEach((document) => {
-          all.push({ ...document.data(), id: document.id })
-        })
+  const { userTasks } = useUserActivities()
 
-        setTasks(all)
-      })
-  }, [user.username])
+  if (!userTasks) {
+    return null
+  }
 
   return (
     <>
-      <Box display={tasks.length > 0 ? 'block' : 'none'}>
+      <Box display={userTasks.length > 0 ? 'block' : 'none'}>
         <Box m={2} display="flex">
           <Typography variant="body2" color="secondary">
-            {tasks.length}
+            {userTasks.length}
           </Typography>
           <Box ml={0.5}>
             <Typography variant="body2">tasks posted by you</Typography>
           </Box>
         </Box>
 
-        {tasks.map((task) => (
+        {userTasks.map((task) => (
           <TaskTile key={task.id} {...task} />
         ))}
       </Box>
-      <Box display={tasks.length === 0 ? 'flex' : 'none'} m={2}>
+      <Box display={userTasks.length === 0 ? 'flex' : 'none'} m={2}>
         <Typography variant="body2" className={classes.label}>
           You have not posted any tasks yet <HelpOutlineOutlinedIcon color="primary" />
         </Typography>

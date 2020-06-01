@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Button, Grid, Box, TextField, Typography } from '@material-ui/core'
-import { useAsync } from '../../../../utils/use-async'
-import { createTask } from '../../../../utils/task-client'
-import { useAuth } from '../../../../context/auth-context'
-import { ReactComponent as ConfirmIcon } from '../../../../assets/confirmation.svg'
+import { useAsync } from '../../../utils/use-async'
+import { createTask } from '../../../utils/task-client'
+import { useAuth } from '../../../context/auth-context'
+import { ReactComponent as ConfirmIcon } from '../../../assets/confirmation.svg'
 
-const OAStepper = ({ handleClose }) => {
+const CreateTask = ({ handleClose }) => {
   const { user } = useAuth()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -68,7 +68,7 @@ const OAStepper = ({ handleClose }) => {
                     id="outlined-multiline-static"
                     label="Describe your task here"
                     multiline
-                    rows={4}
+                    rows={6}
                     variant="outlined"
                     fullWidth
                     value={description}
@@ -107,4 +107,4 @@ const OAStepper = ({ handleClose }) => {
   )
 }
 
-export default OAStepper
+export default CreateTask
