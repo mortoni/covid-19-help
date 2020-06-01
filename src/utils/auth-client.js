@@ -20,7 +20,6 @@ function login({ email, password }) {
 }
 
 function register({ firstName, lastName, username, email, phoneNumber, address, password, confirmPassword }) {
-  debugger
   return client('signup', {
     data: { firstName, lastName, username, email, phoneNumber, address, password, confirmPassword },
   })

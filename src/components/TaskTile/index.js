@@ -8,7 +8,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(2),
-    padding: theme.spacing(2),
+    padding: theme.spacing(1, 2, 1, 2),
   },
 }))
 

@@ -26,7 +26,7 @@ const OADialog = ({ open, setOpen }) => {
       >
         <DialogTitle id="dialog" onClose={handleClose} />
         <DialogContent>
-          <Stepper />
+          <Stepper handleClose={handleClose} />
         </DialogContent>
       </Dialog>
     </div>

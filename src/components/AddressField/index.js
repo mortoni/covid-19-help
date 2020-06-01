@@ -7,14 +7,31 @@ const AddressField = ({ handleChange }) => {
 
   const handleSelect = (l) => {
     setLocation(l)
+    let postcode = ''
+    let city = ''
 
     geocodeByAddress(l)
-      .then((results) => getLatLng(results[0]))
+      .then((results) => {
+        const place = results[0]
+
+        place.address_components.forEach((p) => {
+          if (p.types.includes('locality')) {
+            city = p.long_name
+          }
+          if (p.types.includes('postal_code')) {
+            postcode = p.long_name
+          }
+        })
+
+        return getLatLng(place)
+      })
       .then(({ lat, lng }) => {
         handleChange({
           location: l,
           lat,
           lng,
+          postcode,
+          city,
         })
       })
     //   TODO handle catch
@@ -42,6 +59,7 @@ const AddressField = ({ handleChange }) => {
               <Box p={2}>
                 {loading && <div>Loading...</div>}
                 {suggestions.map((suggestion) => (
+                  // TODO add key here
                   <MenuItem {...getSuggestionItemProps(suggestion, {})}>
                     <Typography variant="body2"></Typography>
                     {suggestion.description}

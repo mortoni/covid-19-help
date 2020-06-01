@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { Button, Grid, Box, TextField, Typography } from '@material-ui/core'
-import { navigate } from '@reach/router'
 import { useAsync } from '../../../../utils/use-async'
 import { createTask } from '../../../../utils/task-client'
 import { useAuth } from '../../../../context/auth-context'
-import { AUTHENTICATED_ROUTES } from '../../../../routes'
+import { ReactComponent as ConfirmIcon } from '../../../../assets/confirmation.svg'
 
-const OAStepper = () => {
+const OAStepper = ({ handleClose }) => {
   const { user } = useAuth()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -33,13 +32,17 @@ const OAStepper = () => {
     <>
       <Grid container spacing={2}>
         <Grid container item xs={12} justify="center">
-          <Typography variant="h5"> Post a task</Typography>
+          {!hasSubmitted && !isLoading && (
+            <>
+              <Typography variant="h5"> Post a task</Typography>
 
-          <Box my={2} textAlign="center">
-            <Typography variant="body1">
-              Name and describe your task so that your good neighbours can help you.
-            </Typography>
-          </Box>
+              <Box my={2} textAlign="center">
+                <Typography variant="body1">
+                  Name and describe your task so that your good neighbours can help you.
+                </Typography>
+              </Box>
+            </>
+          )}
         </Grid>
         <Grid item xs={12}>
           {!hasSubmitted && !isLoading ? (
@@ -75,8 +78,10 @@ const OAStepper = () => {
               </Grid>
             </form>
           ) : (
-            <Box display="flex" flexDirection="column">
-              icon
+            <Box display="flex" flexDirection="column" alignItems="center" mx={12} textAlign="center">
+              <Box justifyContent="center" display="flex">
+                <ConfirmIcon />
+              </Box>
               <Box my={2}>
                 <Typography variant="h5">Your task has been published!</Typography>
               </Box>
@@ -91,12 +96,7 @@ const OAStepper = () => {
                 Post my task
               </Button>
             ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                onClick={() => navigate(AUTHENTICATED_ROUTES.DASHBOARD)}
-              >
+              <Button variant="contained" color="primary" fullWidth onClick={() => handleClose()}>
                 Back to dashboard
               </Button>
             )}

@@ -3,11 +3,12 @@ import GoogleMapReact from 'google-map-react'
 import usePosition from '../../utils/use-position'
 import { getDistance, DEFAULT_TASKS_RADIUS } from '../../utils/geo-help'
 import { useAuth } from '../../context/auth-context'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { Box } from '@material-ui/core'
 import { db } from '../../firebase'
 import { ReactComponent as PinIcon } from '../../assets/icons/pin.svg'
 import TaskIndicator from './components/TaskIndicator'
+import { TasksContext } from '../../context/task-context'
 
 const useStyles = makeStyles((theme) => ({
   taskMarker: {
@@ -21,39 +22,49 @@ const useStyles = makeStyles((theme) => ({
 
 const UserMarker = () => <PinIcon />
 
-const TaskMarker = ({ className, lat, lng, user }) => {
+const TaskMarker = ({ className, lat, lng, user, isHover }) => {
+  const theme = useTheme()
+
   if (lat === user.address.lat || lng === user.address.lng) {
     return null
   }
 
-  return <Box className={className} />
+  return (
+    <Box
+      className={className}
+      style={{ backgroundColor: isHover ? theme.palette.secondary.main : theme.palette.primary.main }}
+    />
+  )
 }
 
 const OAMap = () => {
   const { user } = useAuth()
+  const { tasks } = React.useContext(TasksContext)
   const classes = useStyles()
   const { lat, lng } = usePosition()
-  const [tasks, setTasks] = React.useState([])
+  const [dbTasks, setDbTasks] = React.useState([])
   const [maps, setMaps] = React.useState(null)
   const isLoading = false
 
-  if (maps) {
-    db.collection('tasks')
-      .get()
-      .then((response) => {
+  React.useEffect(() => {
+    if (maps) {
+      // TODO move this logic to a hook
+
+      db.collection('tasks').onSnapshot(({ docs }) => {
         const all = []
-        response.forEach((document) => {
+        docs.forEach((document) => {
           const task = document.data()
           const distance = getDistance(lat, lng, task.address.lat, task.address.lng).toFixed(1)
 
-          if (distance <= DEFAULT_TASKS_RADIUS) {
-            all.push(document.data())
+          if (distance <= DEFAULT_TASKS_RADIUS && task.username !== user.username) {
+            all.push({ ...document.data(), id: document.id })
           }
         })
 
-        setTasks(all)
+        setDbTasks(all)
       })
-  }
+    }
+  }, [lat, lng, maps, user.username])
 
   const handleApiLoaded = ({ map, maps }) => {
     setMaps(maps)
@@ -73,17 +84,18 @@ const OAMap = () => {
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded({ map, maps })}
         >
           <UserMarker lat={user.address.lat} lng={user.address.lng} />
-          {tasks.map((task) => (
+          {dbTasks.map((task) => (
             <TaskMarker
               user={user}
-              key={task.userId}
+              isHover={task.id === tasks.onHover}
+              key={task.id}
               lat={task.address.lat}
               lng={task.address.lng}
               className={classes.taskMarker}
             />
           ))}
         </GoogleMapReact>
-        <TaskIndicator number={tasks.length} location={user.address.location} />
+        <TaskIndicator number={dbTasks.length} address={user.address} />
       </div>
     )
   } else {

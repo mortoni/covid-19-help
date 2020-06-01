@@ -21,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
   },
 }))
-const TaskIndicator = ({ number, location }) => {
+const TaskIndicator = ({ number, address }) => {
   const classes = useStyles()
 
   return (
-    <Box display="flex" justifyContent="center" overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">
+    <Box display="flex" justifyContent="center" whiteSpace="nowrap">
       <Paper className={classes.paper}>
         <Box>
           <Typography variant="body1" color="primary">
@@ -40,9 +40,9 @@ const TaskIndicator = ({ number, location }) => {
         <Box>
           <RoomOutlinedIcon color="primary" />
         </Box>
-        <Box mx={0.5} textOverflow="ellipsis">
+        <Box mx={0.5} textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap">
           <Typography variant="body1" className={classes.label}>
-            {location}
+            {`${address.city} ${address.postcode}`}
           </Typography>
         </Box>
       </Paper>
