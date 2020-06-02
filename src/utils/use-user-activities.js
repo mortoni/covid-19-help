@@ -1,6 +1,6 @@
 import React from 'react'
 import { db } from '../firebase'
-import { useAuth } from '../context/auth-context'
+import { useAuth } from 'context/auth-context'
 
 // TODO loading indicator
 const useUserActivities = () => {

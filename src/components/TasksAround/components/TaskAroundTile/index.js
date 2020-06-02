@@ -2,9 +2,9 @@ import React from 'react'
 import { Box, Paper, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import Avatar from '../../../Avatar'
-import { TasksContext } from '../../../../context/task-context'
-import Dialog from '../../../Dialog'
+import Avatar from 'components/Avatar'
+import { TasksContext } from 'context/task-context'
+import Dialog from 'components/Dialog'
 import OfferToHelp from '../OfferToHelp'
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 const TaskAroundTile = ({ createdAt, description, address, name, username, id }) => {
   const classes = useStyles()
-  const { tasks, dispatch } = React.useContext(TasksContext)
+  const { dispatch } = React.useContext(TasksContext)
   const [open, setOpen] = React.useState(false)
 
   function handleSelect() {
@@ -61,7 +61,6 @@ const TaskAroundTile = ({ createdAt, description, address, name, username, id })
           </Box>
         </Box>
       </Paper>
-      {/* TODO this dialog should be on root with a context for it */}
       <Dialog open={open} setOpen={setOpen}>
         <OfferToHelp />
       </Dialog>

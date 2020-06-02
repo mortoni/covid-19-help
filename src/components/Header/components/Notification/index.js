@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Popover, Typography, IconButton, Grid, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import NotificationTile from './NotificationTile'
-import { ReactComponent as NotificationIcon } from '../../../../assets/icons/notification-icon.svg'
-import useUserActivities from '../../../../utils/use-user-activities'
+import { ReactComponent as NotificationIcon } from 'assets/icons/notification-icon.svg'
+import useUserActivities from 'utils/use-user-activities'
 
 const useStyles = makeStyles((theme) => ({
   popover: {},

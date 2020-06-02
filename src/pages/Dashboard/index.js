@@ -1,10 +1,10 @@
 import React from 'react'
 import { Box, Tab, Tabs } from '@material-ui/core'
-import TabPanel from '../../components/TabPanel'
 import { makeStyles } from '@material-ui/core/styles'
-import OAMap from '../../components/OAMap'
-import UserActivities from '../../components/UserActivities'
-import TasksAround from '../../components/TasksAround'
+import TabPanel from 'components/TabPanel'
+import OAMap from 'components/OAMap'
+import UserActivities from 'components/UserActivities'
+import TasksAround from 'components/TasksAround'
 
 function a11yProps(index) {
   return {

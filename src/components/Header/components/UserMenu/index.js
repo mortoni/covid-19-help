@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { IconButton, Drawer, Box, Button } from '@material-ui/core'
-import Avatar from '../../../Avatar'
 import { makeStyles } from '@material-ui/core/styles'
 import UserIcon from '@material-ui/icons/PersonOutlineOutlined'
 import SettingIcon from '@material-ui/icons/SettingsOutlined'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 import { navigate } from '@reach/router'
-import { AUTHENTICATED_ROUTES } from '../../../../routes'
-import { useAuth } from '../../../../context/auth-context'
+import Avatar from 'components/Avatar'
+import { AUTHENTICATED_ROUTES } from 'routes'
+import { useAuth } from 'context/auth-context'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {},

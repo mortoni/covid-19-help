@@ -1,13 +1,13 @@
 import React from 'react'
 import { Box, Typography, Grid, Button, TextField } from '@material-ui/core'
-import { TasksContext } from '../../../../context/task-context'
 import { makeStyles } from '@material-ui/core/styles'
+import { TasksContext } from 'context/task-context'
 import format from 'date-fns/format'
-import Avatar from '../../../Avatar'
-import { addOffer } from '../../../../utils/task-client'
-import { useAuth } from '../../../../context/auth-context'
-import { useAsync } from '../../../../utils/use-async'
-import { ReactComponent as ConfirmIcon } from '../../../../assets/confirmation.svg'
+import Avatar from 'components/Avatar'
+import { addOffer } from 'utils/task-client'
+import { useAuth } from 'context/auth-context'
+import { useAsync } from 'utils/use-async'
+import { ReactComponent as ConfirmIcon } from 'assets/confirmation.svg'
 
 const useStyles = makeStyles((theme) => ({
   header: {

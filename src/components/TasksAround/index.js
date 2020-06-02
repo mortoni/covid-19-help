@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, TextField, InputAdornment, Typography } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import TaskAroundTile from './components/TaskAroundTile'
-import useTasksAround from '../../utils/use-tasks-around'
+import useTasksAround from 'utils/use-tasks-around'
 
 const TaskAround = () => {
   const [search, setSearch] = React.useState('')

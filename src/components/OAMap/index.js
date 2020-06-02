@@ -1,10 +1,10 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react'
-import { useAuth } from '../../context/auth-context'
-import { ReactComponent as PinIcon } from '../../assets/icons/pin.svg'
+import { useAuth } from 'context/auth-context'
+import { ReactComponent as PinIcon } from 'assets/icons/pin.svg'
 import TaskIndicator from './components/TaskIndicator'
-import { TasksContext } from '../../context/task-context'
-import useTasksAround from '../../utils/use-tasks-around'
+import { TasksContext } from 'context/task-context'
+import useTasksAround from 'utils/use-tasks-around'
 import TaskMarker from './components/TaskMarker'
 
 const UserMarker = () => <PinIcon />
@@ -25,7 +25,7 @@ const OAMap = () => {
             lng: user.address.lng,
           }}
           defaultZoom={14}
-          yesIWantToUseGoogleMapApiInternals
+          // yesIWantToUseGoogleMapApiInternals
           // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded({ map, maps })}
         >
           <UserMarker lat={user.address.lat} lng={user.address.lng} />

@@ -1,7 +1,7 @@
 import React from 'react'
-import { getDistance, DEFAULT_TASKS_RADIUS } from './geo-help'
+import { getDistance, DEFAULT_TASKS_RADIUS } from 'utils/geo-help'
 import { db } from '../firebase'
-import { useAuth } from '../context/auth-context'
+import { useAuth } from 'context/auth-context'
 
 // TODO loading indicator
 const useTasksAround = () => {

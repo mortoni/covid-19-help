@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Avatar from '../../components/Avatar'
+import Avatar from 'components/Avatar'
 import Location from './components/Location'
 import Badge from './components/Badge'
 import Status from './components/Status'

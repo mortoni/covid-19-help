@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, Container, Grid, Typography } from '@material-ui/core'
 import Loader from 'react-spinners/ClimbingBoxLoader'
-import { useAuth } from '../../context/auth-context'
-import { useAsync } from '../../utils/use-async'
+import { useAuth } from 'context/auth-context'
+import { useAsync } from 'utils/use-async'
 
 const Login = () => {
   const { login } = useAuth()

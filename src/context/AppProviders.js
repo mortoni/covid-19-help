@@ -1,6 +1,6 @@
 import React from 'react'
-import { AuthProvider } from './auth-context'
-import { TasksProvider } from './task-context'
+import { AuthProvider } from 'context/auth-context'
+import { TasksProvider } from 'context/task-context'
 
 function AppProviders({ children }) {
   return (

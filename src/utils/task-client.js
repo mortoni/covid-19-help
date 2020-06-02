@@ -1,4 +1,4 @@
-import { client } from './api-client'
+import { client } from 'utils/api-client'
 
 function createTask({ name, description, address }) {
   return client('createTask', { data: { name, description, address } }).then((task) => task)

@@ -1,7 +1,7 @@
 function toRad(Value) {
   return (Value * Math.PI) / 180
 }
-
+// TODO refactor
 export function getDistance(lat1, lon1, lat2, lon2) {
   var R = 6371 // km
   var dLat = toRad(lat2 - lat1)

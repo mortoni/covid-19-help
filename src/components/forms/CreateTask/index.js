@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Grid, Box, TextField, Typography } from '@material-ui/core'
-import { useAsync } from '../../../utils/use-async'
-import { createTask } from '../../../utils/task-client'
-import { useAuth } from '../../../context/auth-context'
-import { ReactComponent as ConfirmIcon } from '../../../assets/confirmation.svg'
+import { useAsync } from 'utils/use-async'
+import { createTask } from 'utils/task-client'
+import { useAuth } from 'context/auth-context'
+import { ReactComponent as ConfirmIcon } from 'assets/confirmation.svg'
 
 const CreateTask = ({ handleClose }) => {
   const { user } = useAuth()

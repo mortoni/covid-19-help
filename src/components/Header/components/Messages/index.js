@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Popover, Typography, IconButton, Grid, Box, SvgIcon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import MessageTile from './MessageTile'
-import { ReactComponent as MessageIcon } from '../../../../assets/icons/message-icon.svg'
+import { ReactComponent as MessageIcon } from 'assets/icons/message-icon.svg'
 
 const useStyles = makeStyles((theme) => ({
   popover: {},

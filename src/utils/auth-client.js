@@ -1,4 +1,4 @@
-import { client, localStorageKey } from './api-client'
+import { client, localStorageKey } from 'utils/api-client'
 
 function handleTokenResponse({ token }) {
   window.localStorage.setItem(localStorageKey, token)

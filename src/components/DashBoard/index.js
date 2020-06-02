@@ -3,8 +3,8 @@ import { Box, Container, Tabs, Tab, IconButton, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import MapIcon from '@material-ui/icons/Map'
 import TuneIcon from '@material-ui/icons/Tune'
-import TabPanel from '../TabPanel'
-import TaskTile from '../TaskTile'
+import TabPanel from 'components/TabPanel'
+import TaskTile from 'components/TaskTile'
 
 function a11yProps(index) {
   return {

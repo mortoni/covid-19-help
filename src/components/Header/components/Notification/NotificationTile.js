@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@material-ui/core'
-import Avatar from '../../../Avatar'
 import { makeStyles } from '@material-ui/core/styles'
+import Avatar from 'components/Avatar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,8 +13,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 const NotificationTile = (test) => {
   const classes = useStyles()
-
-  debugger
 
   return (
     <Box className={classes.root}>

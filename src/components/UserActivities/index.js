@@ -3,7 +3,7 @@ import TaskTile from '../TaskTile'
 import { Box, Typography } from '@material-ui/core'
 import HelpOutlineOutlinedIcon from '@material-ui/icons/HelpOutlineOutlined'
 import { makeStyles } from '@material-ui/core/styles'
-import useUserActivities from '../../utils/use-user-activities'
+import useUserActivities from 'utils/use-user-activities'
 
 const useStyles = makeStyles((theme) => ({
   label: {

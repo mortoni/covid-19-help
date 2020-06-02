@@ -31,13 +31,11 @@ const Card = () => {
     </Box>
   )
 }
-const Posts = () => {
-  return (
-    <Box display="flex" height="100%" alignItems="center" justifyContent="center">
-      <Card />
-      <Card />
-    </Box>
-  )
-}
+const Posts = () => (
+  <Box display="flex" height="100%" alignItems="center" justifyContent="center">
+    <Card />
+    <Card />
+  </Box>
+)
 
 export default Posts
