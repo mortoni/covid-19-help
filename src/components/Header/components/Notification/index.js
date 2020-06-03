@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import NotificationTile from './NotificationTile'
 import { ReactComponent as NotificationIcon } from 'assets/icons/notification-icon.svg'
 import useUserActivities from 'utils/use-user-activities'
+import Badge from 'components/Badge'
 
 const useStyles = makeStyles((theme) => ({
   popover: {},
@@ -28,12 +29,14 @@ const Notifications = () => {
   const open = Boolean(anchorEl)
   const id = open ? 'notification-popover' : undefined
   const { userTasks } = useUserActivities()
-  let tasks = []
+  let notifications = []
 
   if (userTasks) {
     userTasks.forEach((task) => {
       if (task.offers) {
-        tasks.push({ taskId: task.id, taskName: task.name, offers: task.offers })
+        task.offers.map((offer) => {
+          notifications.push({ offer, taskId: task.id, taskName: task.name })
+        })
       }
     })
   }
@@ -55,7 +58,9 @@ const Notifications = () => {
         color={open ? 'secondary' : 'primary'}
         onClick={handleClick}
       >
-        <NotificationIcon style={{ fontSize: 30, marginTop: 4 }} />
+        <Badge count={notifications.length}>
+          <NotificationIcon style={{ fontSize: 30, marginTop: 4 }} />
+        </Badge>
       </IconButton>
       <Popover
         classes={{ root: classes.popover }}
@@ -75,16 +80,15 @@ const Notifications = () => {
         <Box width={360} p={2}>
           <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
             <Typography variant="h6">Notifications</Typography>
-            <Box className={classes.notification}>{tasks.offers ? tasks.offers.length : 0}</Box>
-            {/* TODO CALCULATE THIS */}
+            <Box className={classes.notification}>{notifications.length}</Box>
           </Box>
           <Grid container spacing={2}>
-            {tasks.map((task) => {
-              task.offers.map((offer) => (
-                <Grid key={offer.user.userId} item xs={12}>
-                  <NotificationTile {...offer} />
+            {notifications.map((notification) => {
+              return (
+                <Grid key={notification.taskId} item xs={12}>
+                  <NotificationTile {...notification} />
                 </Grid>
-              ))
+              )
             })}
           </Grid>
         </Box>
