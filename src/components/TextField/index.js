@@ -7,7 +7,7 @@ function capitalize(label) {
   return label.charAt(0).toUpperCase() + label.slice(1)
 }
 
-const OATextField = ({ name, control, errors, label, required, ...other }) => {
+const OATextField = ({ name, control, errors, label, required, rules, ...other }) => {
   return (
     <Controller
       as={TextField}
@@ -16,9 +16,9 @@ const OATextField = ({ name, control, errors, label, required, ...other }) => {
       label={label ? label : capitalize(name)}
       variant="outlined"
       control={control}
-      helperText={<ErrorField condition={errors[name]} label={`${capitalize(name)} is required.`} />}
+      helperText={<ErrorField condition={errors[name]} label={`${label || capitalize(name)} is required.`} />}
       error={errors[name]}
-      rules={{ required: required ? true : false }}
+      rules={{ ...rules, required: required ? true : false }}
       {...other}
     />
   )

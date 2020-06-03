@@ -1,8 +1,9 @@
 import React from 'react'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import { Box, TextField, Typography, Paper, MenuItem } from '@material-ui/core'
+import { Box, Typography, Paper, MenuItem } from '@material-ui/core'
+import TextField from 'components/TextField'
 
-const AddressField = ({ handleChange }) => {
+const AddressField = ({ name, setValue, ...formProps }) => {
   const [location, setLocation] = React.useState('')
 
   const handleSelect = (l) => {
@@ -26,7 +27,7 @@ const AddressField = ({ handleChange }) => {
         return getLatLng(place)
       })
       .then(({ lat, lng }) => {
-        handleChange({
+        setValue(name, {
           location: l,
           lat,
           lng,
@@ -42,25 +43,24 @@ const AddressField = ({ handleChange }) => {
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
           <TextField
-            id="address"
-            label="Address"
-            variant="outlined"
-            fullWidth
-            onChange={(e) => setLocation(e.target.value)}
+            name={name}
+            value={location}
+            onChange={([event]) => setLocation(event.target.value)}
             inputProps={{
               form: {
                 autocomplete: 'off',
               },
               ...getInputProps(),
             }}
+            {...formProps}
           />
+
           <Box position="relative" display={suggestions.length > 0 || loading ? 'block' : 'none'}>
             <Box component={Paper} position="absolute" width="100%" zIndex={2}>
               <Box p={2}>
                 {loading && <div>Loading...</div>}
                 {suggestions.map((suggestion) => (
-                  // TODO add key here
-                  <MenuItem {...getSuggestionItemProps(suggestion, {})}>
+                  <MenuItem key={suggestion.id} {...getSuggestionItemProps(suggestion, {})}>
                     <Typography variant="body2"></Typography>
                     {suggestion.description}
                   </MenuItem>
