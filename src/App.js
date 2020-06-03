@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuth } from 'context/auth-context'
 import FullPageLoader from 'components/FullPageLoader'
 import ErrorBoundary from 'components/ErrorBoundary'
+
 const AuthenticatedApp = React.lazy(() => import(/* webpackPrefetch: true */ './AuthenticatedApp'))
 const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'))
 
