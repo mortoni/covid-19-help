@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import { Button, Box } from '@material-ui/core'
+import { navigate } from '@reach/router'
 import Logo from 'assets/logo.png'
 import OneAnother from 'assets/oneAnother.png'
 import Dialog from 'components/Dialog'
@@ -12,6 +13,7 @@ import Messages from './components/Messages'
 import UserMenu from './components/UserMenu'
 import { ReactComponent as PenIcon } from 'assets/icons/pen-icon.svg'
 import CreateTask from 'components/forms/CreateTask'
+import { AUTHENTICATED_ROUTES } from 'routes'
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -24,6 +26,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  logo: {
+    alignSelf: 'flex-start',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    cursor: 'pointer',
+  },
 }))
 export default function MenuAppBar() {
   const classes = useStyles()
@@ -34,7 +43,7 @@ export default function MenuAppBar() {
       <AppBar position="static" color="transparent" elevation={0} className={classes.appBar}>
         <Toolbar>
           <Box display={{ xs: 'none', md: 'flex' }} flexDirection="column" flexGrow={1}>
-            <Box alignSelf="flex-start" display="flex" flexDirection="column" alignItems="center">
+            <Box className={classes.logo} onClick={() => navigate(AUTHENTICATED_ROUTES.DASHBOARD)}>
               <img src={Logo} alt="Logo" width={32} height={32} />
 
               <Typography variant="body1">Dashboard</Typography>

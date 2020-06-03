@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { IconButton, Drawer, Box, Button } from '@material-ui/core'
+import { IconButton, Drawer, Box, Button, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import UserIcon from '@material-ui/icons/PersonOutlineOutlined'
 import SettingIcon from '@material-ui/icons/SettingsOutlined'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { navigate } from '@reach/router'
 import Avatar from 'components/Avatar'
 import { AUTHENTICATED_ROUTES } from 'routes'
@@ -13,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {},
   profile: {
     display: 'flex',
-    height: 80,
+    height: `calc(80px - ${theme.spacing(2)}px)`,
     borderBottom: '1px solid #c4c4c4',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexGrow: 1,
-    marginRight: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   },
 }))
 const UserMenu = () => {
@@ -52,7 +53,10 @@ const UserMenu = () => {
 
       <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)}>
         <Box width={300} p={2}>
-          <Box className={classes.profile}>{/* TODO */}</Box>
+          <Box className={classes.profile}>
+            <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
+            <Avatar>{getInitials()}</Avatar>
+          </Box>
           <Box my={2}>
             <Button
               variant="outlined"
@@ -68,6 +72,11 @@ const UserMenu = () => {
           <Box my={2}>
             <Button color="primary" className={classes.button} startIcon={<SettingIcon />} fullWidth>
               Settings
+            </Button>
+          </Box>
+          <Box my={2}>
+            <Button color="primary" className={classes.button} startIcon={<HelpOutlineIcon />} fullWidth>
+              Help and support
             </Button>
           </Box>
           <Box my={2}>
