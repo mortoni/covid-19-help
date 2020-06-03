@@ -77,7 +77,7 @@ const Notifications = () => {
           horizontal: 'left',
         }}
       >
-        <Box width={360} p={2}>
+        <Box width={440} p={2}>
           <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
             <Typography variant="h6">Notifications</Typography>
             <Box className={classes.notification}>{notifications.length}</Box>
