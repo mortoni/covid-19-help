@@ -34,9 +34,14 @@ const UserMenu = () => {
     logout()
   }
 
-  function goToProfile(event) {
+  function goToProfile() {
     toggleDrawer(false)
     navigate(AUTHENTICATED_ROUTES.PROFILE)
+  }
+
+  function goToSettings() {
+    toggleDrawer(false)
+    navigate(AUTHENTICATED_ROUTES.SETTINGS)
   }
 
   return (
@@ -70,7 +75,13 @@ const UserMenu = () => {
             </Button>
           </Box>
           <Box my={2}>
-            <Button color="primary" className={classes.button} startIcon={<SettingIcon />} fullWidth>
+            <Button
+              color="primary"
+              className={classes.button}
+              startIcon={<SettingIcon />}
+              onClick={goToSettings}
+              fullWidth
+            >
               Settings
             </Button>
           </Box>

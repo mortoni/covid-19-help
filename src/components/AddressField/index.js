@@ -3,8 +3,14 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import { Box, Typography, Paper, MenuItem } from '@material-ui/core'
 import TextField from 'components/TextField'
 
-const AddressField = ({ name, setValue, ...formProps }) => {
-  const [location, setLocation] = React.useState('')
+const AddressField = ({ name, setValue, getValues, ...formProps }) => {
+  const [location, setLocation] = React.useState(getValues(name))
+
+  // React.useEffect(() => {
+  //   if (getValues(name)) {
+  //     setLocation(getValues(name).location)
+  //   }
+  // }, [getValues, name])
 
   const handleSelect = (l) => {
     setLocation(l)

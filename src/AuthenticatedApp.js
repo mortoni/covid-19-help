@@ -6,7 +6,8 @@ import Header from 'components/Header'
 import { navigate } from '@reach/router'
 
 import Dashboard from 'pages/Dashboard'
-import ProfilePage from 'pages/Profile'
+import Profile from 'pages/Profile'
+import Settings from 'pages/Settings'
 
 // remove div that wraps pages/route
 function RouterWrapper({ children }) {
@@ -23,7 +24,8 @@ const AuthenticatedApp = () => {
       <Header />
       <Router primary={false} component={RouterWrapper}>
         <Dashboard path={AUTHENTICATED_ROUTES.DASHBOARD} />
-        <ProfilePage path={AUTHENTICATED_ROUTES.PROFILE} />
+        <Profile path={AUTHENTICATED_ROUTES.PROFILE} />
+        <Settings path={AUTHENTICATED_ROUTES.SETTINGS} />
       </Router>
     </Box>
   )

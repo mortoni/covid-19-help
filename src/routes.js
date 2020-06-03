@@ -1,6 +1,7 @@
 export const AUTHENTICATED_ROUTES = {
   DASHBOARD: '/',
   PROFILE: '/profile',
+  SETTINGS: '/settings',
 }
 
 export const UNATHENTICATED_ROUTES = {
