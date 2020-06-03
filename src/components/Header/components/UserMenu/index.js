@@ -44,6 +44,11 @@ const UserMenu = () => {
     navigate(AUTHENTICATED_ROUTES.SETTINGS)
   }
 
+  function goToHelpAndSupport() {
+    toggleDrawer(false)
+    navigate(AUTHENTICATED_ROUTES.HELP_SUPPORT)
+  }
+
   return (
     <>
       <IconButton
@@ -86,7 +91,13 @@ const UserMenu = () => {
             </Button>
           </Box>
           <Box my={2}>
-            <Button color="primary" className={classes.button} startIcon={<HelpOutlineIcon />} fullWidth>
+            <Button
+              color="primary"
+              className={classes.button}
+              startIcon={<HelpOutlineIcon />}
+              onClick={goToHelpAndSupport}
+              fullWidth
+            >
               Help and support
             </Button>
           </Box>

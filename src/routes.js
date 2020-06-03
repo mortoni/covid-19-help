@@ -2,6 +2,7 @@ export const AUTHENTICATED_ROUTES = {
   DASHBOARD: '/',
   PROFILE: '/profile',
   SETTINGS: '/settings',
+  HELP_SUPPORT: '/help-and-support',
 }
 
 export const UNATHENTICATED_ROUTES = {
