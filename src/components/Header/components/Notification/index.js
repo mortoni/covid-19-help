@@ -1,30 +1,12 @@
 import React, { useState } from 'react'
 import { Popover, Typography, IconButton, Grid, Box } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 import NotificationTile from './NotificationTile'
 import { ReactComponent as NotificationIcon } from 'assets/icons/notification-icon.svg'
 import useUserActivities from 'utils/use-user-activities'
 import Badge from 'components/Badge'
+import NotificationBadge from 'components/NotificationBadge'
 
-const useStyles = makeStyles((theme) => ({
-  popover: {},
-  paper: {},
-  notification: {
-    background: theme.palette.secondary.main,
-    border: '2px solid #FFFFFF',
-    borderRadius: 99,
-    width: 25,
-    height: 25,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    boxShadow: '0px 0px 1px rgba(0, 0, 0, 0.25)',
-    color: 'white',
-    fontWeight: 'bold',
-  },
-}))
 const Notifications = () => {
-  const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const id = open ? 'notification-popover' : undefined
@@ -63,7 +45,6 @@ const Notifications = () => {
         </Badge>
       </IconButton>
       <Popover
-        classes={{ root: classes.popover }}
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -80,13 +61,13 @@ const Notifications = () => {
         <Box width={440} p={2}>
           <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
             <Typography variant="h6">Notifications</Typography>
-            <Box className={classes.notification}>{notifications.length}</Box>
+            <NotificationBadge>{notifications.length}</NotificationBadge>
           </Box>
           <Grid container spacing={2}>
             {notifications.map((notification) => {
               return (
                 <Grid key={notification.taskId} item xs={12}>
-                  <NotificationTile {...notification} />
+                  <NotificationTile {...notification} onClose={handleClose} />
                 </Grid>
               )
             })}

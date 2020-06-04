@@ -1,8 +1,10 @@
 import React from 'react'
 import { Box, Typography, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { differenceInMinutes, differenceInHours, differenceInCalendarDays } from 'date-fns'
+import { differenceInMinutes } from 'date-fns'
 import Avatar from 'components/Avatar'
+import { AUTHENTICATED_ROUTES } from 'routes'
+import { navigate } from '@reach/router'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: ({ read }) => (read ? 'white' : '#FDF6EB'),
     borderRadius: theme.spacing(2),
     paddingRight: theme.spacing(2),
+    cursor: 'pointer',
   },
 }))
-const NotificationTile = ({ offer, taskName }) => {
+const NotificationTile = ({ offer, taskName, taskId, onClose }) => {
   const { user, read, createdAt } = offer
   const classes = useStyles({ read })
   const label = `${user.firstName} ${user.lastName} sent you an offer about “${taskName}”.`
@@ -31,9 +34,14 @@ const NotificationTile = ({ offer, taskName }) => {
     return hours <= 24 ? `${hours}h` : `${days}d`
   }
 
+  function handleOfferClick() {
+    onClose()
+    navigate(AUTHENTICATED_ROUTES.TASK, { state: { taskId } })
+  }
+
   return (
     <Box display="flex" flexDirection="column">
-      <Box className={classes.root}>
+      <Box className={classes.root} onClick={handleOfferClick}>
         <Avatar>{`${user.firstName.charAt(0)}${user.lastName.charAt(0)}`} </Avatar>
         <Box mx={1}>
           <Typography variant="body1">{label}</Typography>

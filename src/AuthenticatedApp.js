@@ -9,6 +9,7 @@ import Dashboard from 'pages/Dashboard'
 import Profile from 'pages/Profile'
 import Settings from 'pages/Settings'
 import HelpAndSupport from 'pages/HelpAndSupport'
+import Task from 'pages/Task'
 
 // remove div that wraps pages/route
 function RouterWrapper({ children }) {
@@ -28,6 +29,7 @@ const AuthenticatedApp = () => {
         <Profile path={AUTHENTICATED_ROUTES.PROFILE} />
         <Settings path={AUTHENTICATED_ROUTES.SETTINGS} />
         <HelpAndSupport path={AUTHENTICATED_ROUTES.HELP_SUPPORT} />
+        <Task path={AUTHENTICATED_ROUTES.TASK} />
       </Router>
     </Box>
   )

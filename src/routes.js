@@ -3,6 +3,7 @@ export const AUTHENTICATED_ROUTES = {
   PROFILE: '/profile',
   SETTINGS: '/settings',
   HELP_SUPPORT: '/help-and-support',
+  TASK: '/task',
 }
 
 export const UNATHENTICATED_ROUTES = {
