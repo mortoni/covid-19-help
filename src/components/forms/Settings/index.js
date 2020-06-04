@@ -59,7 +59,6 @@ const SettingsForm = () => {
   function resetAddress() {
     setAddress(true)
     // TOFIX: not working
-    debugger
     setValue('address', user.address.location)
   }
 

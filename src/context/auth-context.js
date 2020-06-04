@@ -19,6 +19,9 @@ function AuthProvider(props) {
 
   const login = React.useCallback((form) => authClient.login(form).then((user) => setData({ user })), [setData])
   const register = React.useCallback((form) => authClient.register(form).then((user) => setData({ user })), [setData])
+  const uploadImage = React.useCallback((image) => authClient.uploadImage(image).then((user) => setData({ user })), [
+    setData,
+  ])
   const logout = React.useCallback(() => {
     authClient.logout()
     setData(null)
@@ -26,7 +29,13 @@ function AuthProvider(props) {
 
   const user = data?.user
 
-  const value = React.useMemo(() => ({ user, login, logout, register }), [login, logout, register, user])
+  const value = React.useMemo(() => ({ user, login, logout, register, uploadImage }), [
+    login,
+    logout,
+    register,
+    uploadImage,
+    user,
+  ])
 
   if (isLoading || isIdle) {
     return <>FullPageSpinner </>

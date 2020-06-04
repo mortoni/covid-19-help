@@ -28,6 +28,15 @@ function register({ firstName, lastName, username, email, phoneNumber, address, 
     .then(({ userCredentials }) => userCredentials)
 }
 
+function uploadImage({ image }) {
+  return client('user/image', {
+    data: { image },
+    headers: { 'content-type': 'multipart/form-data' },
+  }).then((response) => {
+    debugger
+  })
+}
+
 function getToken() {
   return window.localStorage.getItem(localStorageKey)
 }
@@ -36,5 +45,5 @@ function isLoggedIn() {
   return Boolean(getToken())
 }
 
-export { login, register, getToken, getUser, isLoggedIn }
+export { login, register, getToken, getUser, isLoggedIn, uploadImage }
 export { logout } from './api-client'

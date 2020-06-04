@@ -22,9 +22,6 @@ const Task = ({ location }) => {
   const { userTasks } = useUserActivities()
   const [task, setTask] = React.useState(null)
 
-  if (!location.state || !location.state.taskId) {
-    navigate(AUTHENTICATED_ROUTES.DASHBOARD)
-  }
   React.useEffect(() => {
     if (userTasks) {
       userTasks.forEach((task) => {

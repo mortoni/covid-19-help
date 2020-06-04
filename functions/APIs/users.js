@@ -98,7 +98,7 @@ exports.signUpUser = (request, response) => {
     })
 }
 
-deleteImage = (imageName) => {
+const deleteImage = (imageName) => {
   const bucket = admin.storage().bucket()
   const path = `${imageName}`
   return bucket

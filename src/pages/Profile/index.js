@@ -3,8 +3,8 @@ import { Box, Container, Grid, Typography, Divider, Button } from '@material-ui/
 import { makeStyles } from '@material-ui/core/styles'
 import LocationIcon from '@material-ui/icons/LocationOnOutlined'
 import { useAuth } from 'context/auth-context'
-import Avatar from 'components/Avatar'
 import Status from './components/Status'
+import EditableAvatar from './components/EditableAvatar'
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -51,7 +51,9 @@ const ProfilePage = () => {
 
           <Grid item xs={12}>
             <Box my={3} display="flex" alignItems="center" flexDirection="column">
-              <Avatar size={12}>{`${user.firstName.charAt(0)} ${user.lastName.charAt(0)}`}</Avatar>
+              <Box position="relative" pr={3} pt={2}>
+                <EditableAvatar {...user} />
+              </Box>
               <Box my={2}>
                 <Typography variant="h4">{`${user.firstName} ${user.lastName}`}</Typography>
               </Box>
