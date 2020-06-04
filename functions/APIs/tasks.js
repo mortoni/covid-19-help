@@ -71,3 +71,28 @@ exports.addOffer = (request, response) => {
       })
     })
 }
+
+exports.assignTask = (request, response) => {
+  const { assignedUser } = request.body
+  const taskRef = db.collection('tasks').doc(`${request.params.taskId}`)
+  const userRef = db.doc(`/users/${assignedUser.username}`)
+
+  if (!request.user.username) {
+    return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json({ body: 'username Must not be empty' })
+  }
+
+  const p1 = taskRef.update({
+    assignedUser,
+    assignedAt: new Date().toISOString(),
+  })
+
+  const p2 = userRef.update({
+    acceptedTasks: admin.firestore.FieldValue.arrayUnion(request.params.taskId),
+  })
+
+  Promise.all([p1, p2])
+    .then(() => response.set({ 'Access-Control-Allow-Origin': '*' }).json('Sucessful assignment'))
+    .catch(() =>
+      response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'Something went wrong' }),
+    )
+}

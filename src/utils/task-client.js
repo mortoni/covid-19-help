@@ -12,4 +12,8 @@ function addOffer({ taskId, user, message }) {
   return client(`task/${taskId}/addOffer`, { data: { user, message }, method: 'PUT' }).then((offer) => offer)
 }
 
-export { createTask, getTasks, addOffer }
+function assignTask({ taskId, assignedUser }) {
+  return client(`task/${taskId}/assign`, { data: { assignedUser }, method: 'PUT' }).then((task) => task)
+}
+
+export { createTask, getTasks, addOffer, assignTask }

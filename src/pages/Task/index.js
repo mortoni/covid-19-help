@@ -6,6 +6,7 @@ import { AUTHENTICATED_ROUTES } from 'routes'
 import { navigate } from '@reach/router'
 import format from 'date-fns/format'
 import NotificationBadge from 'components/NotificationBadge'
+import OfferTile from 'components/OfferTile'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,7 @@ const Task = ({ location }) => {
     if (userTasks) {
       userTasks.forEach((task) => {
         if (task.id === location.state.taskId) {
+          // update offer to read
           setTask(task)
         }
       })
@@ -75,7 +77,10 @@ const Task = ({ location }) => {
           </Grid>
 
           <Grid item xs={12}>
-            OfferTile
+            {/* TODO: add key */}
+            {task.offers.map((offer) => (
+              <OfferTile {...offer} taskId={task.id} />
+            ))}
           </Grid>
         </Grid>
       </Container>
