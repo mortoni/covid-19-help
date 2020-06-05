@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Container, Box, Grid, Divider, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import useUserActivities from 'utils/use-user-activities'
+import { useUserActivities } from 'utils/use-user-activities'
 import { AUTHENTICATED_ROUTES } from 'routes'
 import { navigate } from '@reach/router'
 import format from 'date-fns/format'

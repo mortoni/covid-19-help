@@ -12,6 +12,7 @@ app.get('/tasks', getAllTasks)
 app.post('/createTask', auth, createTask)
 app.put('/task/:taskId/addOffer', addOffer)
 app.put('/task/:taskId/assign', auth, assignTask)
+
 app.post('/signup', signUpUser)
 app.post('/login', loginUser)
 app.post('/user/image', auth, uploadProfilePhoto)

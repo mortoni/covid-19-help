@@ -83,6 +83,7 @@ exports.assignTask = (request, response) => {
 
   const p1 = taskRef.update({
     assignedUser,
+    status: 'inProgress',
     assignedAt: new Date().toISOString(),
   })
 
@@ -91,7 +92,7 @@ exports.assignTask = (request, response) => {
   })
 
   Promise.all([p1, p2])
-    .then(() => response.set({ 'Access-Control-Allow-Origin': '*' }).json('Sucessful assignment'))
+    .then(() => response.set({ 'Access-Control-Allow-Origin': '*' }).json('Updated successfully'))
     .catch(() =>
       response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'Something went wrong' }),
     )

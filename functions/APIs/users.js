@@ -173,19 +173,12 @@ exports.getUserDetail = (request, response) => {
     .then((doc) => {
       if (doc.exists) {
         userData.userCredentials = doc.data()
-        return response
-          .set({ 'Access-Control-Allow-Origin': '*' })
-          .set({ 'Access-Control-Allow-Origin': '*' })
-          .json(userData)
+        return response.set({ 'Access-Control-Allow-Origin': '*' }).json(userData)
       }
     })
     .catch((error) => {
       console.error(error)
-      return response
-        .set({ 'Access-Control-Allow-Origin': '*' })
-        .status(500)
-        .set({ 'Access-Control-Allow-Origin': '*' })
-        .json({ error: 'error to fetch user' })
+      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'error to fetch user' })
     })
 }
 

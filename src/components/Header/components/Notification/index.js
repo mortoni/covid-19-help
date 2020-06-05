@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Popover, Typography, IconButton, Grid, Box } from '@material-ui/core'
 import NotificationTile from './NotificationTile'
 import { ReactComponent as NotificationIcon } from 'assets/icons/notification-icon.svg'
-import useUserActivities from 'utils/use-user-activities'
+import { useUserActivities } from 'utils/use-user-activities'
 import Badge from 'components/Badge'
 import NotificationBadge from 'components/NotificationBadge'
 
