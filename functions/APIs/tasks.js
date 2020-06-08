@@ -36,11 +36,15 @@ exports.createTask = (request, response) => {
     username: request.user.username,
     createdAt: new Date().toISOString(),
   }
+
   db.collection('tasks')
     .add(newTask)
     .then((doc) => {
       const responseTaskItem = newTask
       responseTaskItem.id = doc.id
+      // TODO solve this:
+      db.collection('tasks').doc(doc.id).update({ taskId: doc.id })
+
       return response.set({ 'Access-Control-Allow-Origin': '*' }).json(responseTaskItem)
     })
     .catch((err) => {

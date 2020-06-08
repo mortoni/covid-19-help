@@ -16,6 +16,7 @@ const UserActivities = () => {
   const classes = useStyles()
   const { userTasks } = useUserActivities()
   const { acceptedTasks } = useAcceptedTask()
+  console.log('reload')
 
   return (
     <>

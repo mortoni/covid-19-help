@@ -1,7 +1,7 @@
 import React from 'react'
 import { db } from '../firebase'
 import { useAuth } from 'context/auth-context'
-
+import { useDocument, useDocumentOnce, useCollectionDataOnce } from 'react-firebase-hooks/firestore'
 // TODO loading indicator
 // TODO this looks wrong, look for a better way to perform this
 export const useUserActivities = () => {
@@ -28,20 +28,29 @@ export const useUserActivities = () => {
 
 export const useAcceptedTask = () => {
   const { user } = useAuth()
-  const [acceptedTasks, setAccepted] = React.useState([])
-  const taskRef = db.collection('tasks')
+  const [tasks, setTasks] = React.useState([])
+  const [userData] = useDocument(db.collection('users').doc(user.username))
 
   React.useEffect(() => {
-    if (user.acceptedTasks) {
-      const all = []
-      user.acceptedTasks.forEach((taskId) => {
-        taskRef.doc(taskId).onSnapshot((document) => {
-          all.push({ ...document.data(), taskId: document.id })
-          setAccepted(all)
-        })
-      })
-    }
-  }, [taskRef, user.acceptedTasks])
+    if (userData) {
+      const { acceptedTasks } = userData.data()
 
-  return { acceptedTasks }
+      if (acceptedTasks) {
+        db.collection('tasks')
+          .where('taskId', 'in', acceptedTasks)
+          .get()
+          .then((docs) => {
+            const all = []
+
+            docs.forEach((doc) => {
+              all.push(doc.data())
+            })
+
+            setTasks(all)
+          })
+      }
+    }
+  }, [userData])
+
+  return { acceptedTasks: tasks }
 }
