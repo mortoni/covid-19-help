@@ -42,7 +42,7 @@ exports.createTask = (request, response) => {
     .then((doc) => {
       const responseTaskItem = newTask
       responseTaskItem.id = doc.id
-      // TODO solve this:
+      // TODO solve this: add then
       db.collection('tasks').doc(doc.id).update({ taskId: doc.id })
 
       return response.set({ 'Access-Control-Allow-Origin': '*' }).json(responseTaskItem)
@@ -50,6 +50,48 @@ exports.createTask = (request, response) => {
     .catch((err) => {
       response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'Something went wrong' })
       console.error(err)
+    })
+}
+
+exports.createOffer = (request, response) => {
+  const { taskId } = request.params
+
+  const newOffer = {
+    message: request.body.message,
+    offerOwner: request.user.username,
+    createdAt: new Date().toISOString(),
+    read: false,
+    status: 'pending',
+    taskOwner: request.body.taskOwner,
+    taskId,
+  }
+
+  db.collection('offers')
+    .add(newOffer)
+    .then((doc) => {
+      // TODO: solve this
+      db.collection('offers').doc(doc.id).update({ offerId: doc.id })
+
+      db.collection('tasks')
+        .doc(taskId)
+        .update({
+          offers: admin.firestore.FieldValue.arrayUnion(doc.id),
+        })
+        .then(() => {
+          return response.set({ 'Access-Control-Allow-Origin': '*' }).json(doc.id)
+        })
+        .catch((err) => {
+          console.error(err)
+          return response.status(500).json({
+            error: err.code,
+          })
+        })
+    })
+    .catch((err) => {
+      console.error(err)
+      return response.status(500).json({
+        error: err.code,
+      })
     })
 }
 

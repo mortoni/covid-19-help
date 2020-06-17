@@ -16,23 +16,22 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
 }))
-const NotificationTile = ({ offer, taskName, taskId, onClose }) => {
-  const { user, read, createdAt } = offer
-  const classes = useStyles({ read })
-  const label = `${user.firstName} ${user.lastName} sent you an offer about “${taskName}”.`
 
-  function getTime() {
-    var diffInMinutes = differenceInMinutes(new Date(), new Date(createdAt))
+function getTime({ createdAt }) {
+  var diffInMinutes = differenceInMinutes(new Date(), new Date(createdAt))
 
-    if (diffInMinutes <= 60) {
-      return diffInMinutes <= 30 ? 'Now' : `${diffInMinutes}m`
-    }
-
-    const hours = Math.floor(diffInMinutes / 60)
-    const days = Math.floor(diffInMinutes / 60 / 24)
-
-    return hours <= 24 ? `${hours}h` : `${days}d`
+  if (diffInMinutes <= 60) {
+    return diffInMinutes <= 30 ? 'Now' : `${diffInMinutes}m`
   }
+
+  const hours = Math.floor(diffInMinutes / 60)
+  const days = Math.floor(diffInMinutes / 60 / 24)
+
+  return hours <= 24 ? `${hours}h` : `${days}d`
+}
+
+const NotificationTile = ({ taskName, taskId, read, createdAt, firstName, lastName, onClose }) => {
+  const classes = useStyles({ read })
 
   function handleOfferClick() {
     onClose()
@@ -42,12 +41,12 @@ const NotificationTile = ({ offer, taskName, taskId, onClose }) => {
   return (
     <Box display="flex" flexDirection="column">
       <Box className={classes.root} onClick={handleOfferClick}>
-        <Avatar>{`${user.firstName.charAt(0)}${user.lastName.charAt(0)}`} </Avatar>
+        <Avatar>{`${firstName.charAt(0)}${lastName.charAt(0)}`} </Avatar>
         <Box mx={1}>
-          <Typography variant="body1">{label}</Typography>
+          <Typography variant="body1">{`${firstName} ${lastName} sent you an offer about “${taskName}”.`}</Typography>
         </Box>
         <Box flexGrow={1}>
-          <Typography variant="body1">{getTime()}</Typography>
+          <Typography variant="body1">{getTime({ createdAt })}</Typography>
         </Box>
       </Box>
       <Box my={0.5}>

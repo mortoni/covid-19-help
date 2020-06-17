@@ -19,7 +19,7 @@ const OAMap = () => {
     return (
       <div style={{ height: '100%', width: '100%', position: 'relative' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBKUWpYchxkzUgQhFXiyegsCyZKDricnus' }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_KEY }}
           defaultCenter={{
             lat: user.address.lat,
             lng: user.address.lng,

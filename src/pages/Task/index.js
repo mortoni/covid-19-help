@@ -7,6 +7,7 @@ import { navigate } from '@reach/router'
 import format from 'date-fns/format'
 import NotificationBadge from 'components/NotificationBadge'
 import OfferTile from 'components/OfferTile'
+import useTask from 'utils/use-task'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,21 +21,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 const Task = ({ location }) => {
   const classes = useStyles()
-  const { userTasks } = useUserActivities()
-  const [task, setTask] = React.useState(null)
+  const { taskId } = location.state
+  const [task] = useTask({ taskId })
 
-  React.useEffect(() => {
-    if (userTasks) {
-      userTasks.forEach((task) => {
-        if (task.id === location.state.taskId) {
-          // update offer to read
-          setTask(task)
-        }
-      })
-    }
-  }, [location.state, location.state.taskId, userTasks])
-
-  if (!task) {
+  if (!task.name) {
     return null
   }
 
@@ -77,9 +67,8 @@ const Task = ({ location }) => {
           </Grid>
 
           <Grid item xs={12}>
-            {/* TODO: add key */}
             {task.offers.map((offer) => (
-              <OfferTile {...offer} taskId={task.id} />
+              <OfferTile key={offer.offerId} {...offer} taskId={taskId} />
             ))}
           </Grid>
         </Grid>

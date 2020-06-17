@@ -8,8 +8,8 @@ function getTasks() {
   return client('tasks').then((tasks) => tasks)
 }
 
-function addOffer({ taskId, user, message }) {
-  return client(`task/${taskId}/addOffer`, { data: { user, message }, method: 'PUT' }).then((offer) => offer)
+function addOffer({ taskId, message, taskOwner }) {
+  return client(`task/${taskId}/createOffer`, { data: { message, taskOwner }, method: 'POST' }).then((offer) => offer)
 }
 
 function assignTask({ taskId, assignedUser }) {

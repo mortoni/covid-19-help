@@ -25,12 +25,12 @@ const OfferToHelp = () => {
   const [submited, setSubmitted] = React.useState(false)
   const { isLoading, run } = useAsync()
   const { user } = useAuth()
-  const [message, setMessage] = React.useState('Hi, I can help with... ')
+  const [message, setMessage] = React.useState('')
   const task = tasks.selected
 
   function handleOffer(e) {
     e.preventDefault()
-    run(addOffer({ taskId: task.id, user, message }))
+    run(addOffer({ taskId: task.id, taskOwner: task.username, message }))
     setSubmitted(true)
   }
 
@@ -85,6 +85,7 @@ const OfferToHelp = () => {
               multiline
               rows={4}
               variant="outlined"
+              placeholder="Hi, I can help with... "
               onChange={handleMessageChange}
               fullWidth
               helperText={

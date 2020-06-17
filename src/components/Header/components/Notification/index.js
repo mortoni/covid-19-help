@@ -1,27 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Popover, Typography, IconButton, Grid, Box } from '@material-ui/core'
 import NotificationTile from './NotificationTile'
 import { ReactComponent as NotificationIcon } from 'assets/icons/notification-icon.svg'
-import { useUserActivities } from 'utils/use-user-activities'
+import useNotification from 'utils/use-notification'
 import Badge from 'components/Badge'
 import NotificationBadge from 'components/NotificationBadge'
 
 const Notifications = () => {
-  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const id = open ? 'notification-popover' : undefined
-  const { userTasks } = useUserActivities()
-  let notifications = []
-
-  if (userTasks) {
-    userTasks.forEach((task) => {
-      if (task.offers) {
-        task.offers.map((offer) => {
-          notifications.push({ offer, taskId: task.id, taskName: task.name })
-        })
-      }
-    })
-  }
+  const [notifications] = useNotification()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -64,13 +53,11 @@ const Notifications = () => {
             <NotificationBadge>{notifications.length}</NotificationBadge>
           </Box>
           <Grid container spacing={2}>
-            {notifications.map((notification) => {
-              return (
-                <Grid key={notification.taskId} item xs={12}>
-                  <NotificationTile {...notification} onClose={handleClose} />
-                </Grid>
-              )
-            })}
+            {notifications.map((notification) => (
+              <Grid key={notification.id} item xs={12}>
+                <NotificationTile {...notification} onClose={handleClose} />
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Popover>
