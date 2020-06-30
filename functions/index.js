@@ -1,6 +1,7 @@
 const functions = require('firebase-functions')
 const app = require('express')()
 const cors = require('cors')
+require('dotenv').config()
 
 const { getAllTasks, createTask, addOffer, assignTask, createOffer } = require('./APIs/tasks')
 const { loginUser, signUpUser, uploadProfilePhoto, getUserDetail } = require('./APIs/users')
