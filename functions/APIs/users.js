@@ -1,21 +1,14 @@
 const { admin, db } = require('../util/admin')
-const config = require('../util/config')
-
 const firebase = require('firebase')
+const config = require('../util/config')
 
 firebase.initializeApp(config)
 
-const { validateLoginData, validateSignUpData } = require('../util/validators')
-
-// Login
-exports.loginUser = (request, response) => {
+exports.login = (request, response) => {
   const user = {
     email: request.body.email,
     password: request.body.password,
   }
-
-  const { valid, errors } = validateLoginData(user)
-  if (!valid) return response.status(400).json(errors)
 
   firebase
     .auth()
@@ -35,7 +28,7 @@ exports.loginUser = (request, response) => {
 }
 
 // Sign up
-exports.signUpUser = (request, response) => {
+exports.signUp = (request, response) => {
   const newUser = {
     firstName: request.body.firstName,
     lastName: request.body.lastName,
@@ -46,12 +39,8 @@ exports.signUpUser = (request, response) => {
     confirmPassword: request.body.confirmPassword,
     username: request.body.username,
   }
-
-  const { valid, errors } = validateSignUpData(newUser)
-
-  if (!valid) return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json(errors)
-
   let token, userId
+
   db.doc(`/users/${newUser.username}`)
     .get()
     .then((doc) => {
@@ -119,7 +108,6 @@ exports.uploadProfilePhoto = (request, response) => {
   const os = require('os')
   const fs = require('fs')
   const busboy = new BusBoy({ headers: request.headers })
-
   let imageFileName
   let imageToBeUploaded = {}
 
@@ -136,7 +124,9 @@ exports.uploadProfilePhoto = (request, response) => {
     imageToBeUploaded = { filePath, mimetype }
     file.pipe(fs.createWriteStream(filePath))
   })
+
   deleteImage(imageFileName)
+
   busboy.on('finish', () => {
     admin
       .storage()
@@ -163,11 +153,13 @@ exports.uploadProfilePhoto = (request, response) => {
         return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: error.code })
       })
   })
+
   busboy.end(request.rawBody)
 }
 
-exports.getUserDetail = (request, response) => {
+exports.getDetail = (request, response) => {
   let userData = {}
+
   db.doc(`/users/${request.user.username}`)
     .get()
     .then((doc) => {
@@ -182,7 +174,7 @@ exports.getUserDetail = (request, response) => {
     })
 }
 
-exports.updateUserDetails = (request, response) => {
+exports.updateDetails = (request, response) => {
   let document = db.collection('users').doc(`${request.user.username}`)
   document
     .update(request.body)

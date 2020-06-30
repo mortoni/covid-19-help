@@ -1,6 +1,6 @@
 const { db, admin } = require('../util/admin')
 
-exports.getAllTasks = (request, response) => {
+exports.getAll = (request, response) => {
   db.collection('tasks')
     .orderBy('createdAt', 'desc')
     .get()
@@ -53,70 +53,70 @@ exports.createTask = (request, response) => {
     })
 }
 
-exports.createOffer = (request, response) => {
-  const { taskId } = request.params
+// exports.createOffer = (request, response) => {
+//   const { taskId } = request.params
 
-  const newOffer = {
-    message: request.body.message,
-    offerOwner: request.user.username,
-    createdAt: new Date().toISOString(),
-    read: false,
-    status: 'pending',
-    taskOwner: request.body.taskOwner,
-    taskId,
-  }
+//   const newOffer = {
+//     message: request.body.message,
+//     offerOwner: request.user.username,
+//     createdAt: new Date().toISOString(),
+//     read: false,
+//     status: 'pending',
+//     taskOwner: request.body.taskOwner,
+//     taskId,
+//   }
 
-  db.collection('offers')
-    .add(newOffer)
-    .then((doc) => {
-      // TODO: solve this
-      db.collection('offers').doc(doc.id).update({ offerId: doc.id })
+//   db.collection('offers')
+//     .add(newOffer)
+//     .then((doc) => {
+//       // TODO: solve this
+//       db.collection('offers').doc(doc.id).update({ offerId: doc.id })
 
-      db.collection('tasks')
-        .doc(taskId)
-        .update({
-          offers: admin.firestore.FieldValue.arrayUnion(doc.id),
-        })
-        .then(() => {
-          return response.set({ 'Access-Control-Allow-Origin': '*' }).json(doc.id)
-        })
-        .catch((err) => {
-          console.error(err)
-          return response.status(500).json({
-            error: err.code,
-          })
-        })
-    })
-    .catch((err) => {
-      console.error(err)
-      return response.status(500).json({
-        error: err.code,
-      })
-    })
-}
+//       db.collection('tasks')
+//         .doc(taskId)
+//         .update({
+//           offers: admin.firestore.FieldValue.arrayUnion(doc.id),
+//         })
+//         .then(() => {
+//           return response.set({ 'Access-Control-Allow-Origin': '*' }).json(doc.id)
+//         })
+//         .catch((err) => {
+//           console.error(err)
+//           return response.status(500).json({
+//             error: err.code,
+//           })
+//         })
+//     })
+//     .catch((err) => {
+//       console.error(err)
+//       return response.status(500).json({
+//         error: err.code,
+//       })
+//     })
+// }
 
-exports.addOffer = (request, response) => {
-  let taskRef = db.collection('tasks').doc(`${request.params.taskId}`)
+// exports.addOffer = (request, response) => {
+//   let taskRef = db.collection('tasks').doc(`${request.params.taskId}`)
 
-  taskRef
-    .update({
-      offers: admin.firestore.FieldValue.arrayUnion({
-        ...request.body,
-        status: 'pending',
-        read: false,
-        createdAt: new Date().toISOString(),
-      }),
-    })
-    .then(() => {
-      response.json({ message: 'Updated successfully' })
-    })
-    .catch((err) => {
-      console.error(err)
-      return response.status(500).json({
-        error: err.code,
-      })
-    })
-}
+//   taskRef
+//     .update({
+//       offers: admin.firestore.FieldValue.arrayUnion({
+//         ...request.body,
+//         status: 'pending',
+//         read: false,
+//         createdAt: new Date().toISOString(),
+//       }),
+//     })
+//     .then(() => {
+//       response.json({ message: 'Updated successfully' })
+//     })
+//     .catch((err) => {
+//       console.error(err)
+//       return response.status(500).json({
+//         error: err.code,
+//       })
+//     })
+// }
 
 exports.assignTask = (request, response) => {
   const { assignedUser } = request.body
