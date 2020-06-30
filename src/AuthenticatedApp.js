@@ -4,7 +4,6 @@ import { Router } from '@reach/router'
 import { Box } from '@material-ui/core'
 import Header from 'components/Header'
 import { navigate } from '@reach/router'
-
 import Dashboard from 'pages/Dashboard'
 import Profile from 'pages/Profile'
 import Settings from 'pages/Settings'

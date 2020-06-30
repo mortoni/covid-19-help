@@ -1,12 +1,11 @@
 import React, { createContext, useReducer } from 'react'
-// import PropTypes from 'prop-types'
 
 const initialState = {
   onHover: null,
   selected: {},
   offerDialog: false,
 }
-
+// TODO rename this context, it will be a context for configuration
 const TasksContext = createContext(initialState)
 const tasksReducer = (state, { type, value }) => {
   switch (type) {
@@ -38,9 +37,5 @@ const TasksProvider = ({ children }) => {
 }
 
 const TasksContexConsumer = TasksContext.Consumer
-
-// TasksProvider.propTypes = {
-//   children: PropTypes.node.isRequired,
-// }
 
 export { tasksReducer, TasksContext, TasksProvider, TasksContexConsumer }

@@ -6,12 +6,6 @@ import TextField from 'components/TextField'
 const AddressField = ({ name, setValue, getValues, ...formProps }) => {
   const [location, setLocation] = React.useState(getValues(name))
 
-  // React.useEffect(() => {
-  //   if (getValues(name)) {
-  //     setLocation(getValues(name).location)
-  //   }
-  // }, [getValues, name])
-
   const handleSelect = (l) => {
     setLocation(l)
     let postcode = ''

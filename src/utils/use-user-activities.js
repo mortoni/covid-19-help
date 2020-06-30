@@ -1,7 +1,7 @@
 import React from 'react'
 import { db } from '../firebase'
 import { useAuth } from 'context/auth-context'
-import { useDocument, useDocumentOnce, useCollectionDataOnce } from 'react-firebase-hooks/firestore'
+import { useDocument } from 'react-firebase-hooks/firestore'
 // TODO loading indicator
 // TODO this looks wrong, look for a better way to perform this
 export const useUserActivities = () => {

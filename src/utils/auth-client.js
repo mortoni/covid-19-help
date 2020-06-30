@@ -34,6 +34,7 @@ function uploadImage({ image }) {
     headers: { 'content-type': 'multipart/form-data' },
   }).then((response) => {
     debugger
+    // TODO
   })
 }
 

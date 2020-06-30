@@ -2,12 +2,11 @@ export const AUTHENTICATED_ROUTES = {
   DASHBOARD: '/',
   PROFILE: '/profile',
   SETTINGS: '/settings',
-  HELP_SUPPORT: '/help-and-support',
   TASK: '/task',
+  HELP_SUPPORT: '/help',
 }
 
 export const UNATHENTICATED_ROUTES = {
-  LANDINGPAGE: '/',
   ABOUT: '/about',
   HOW: '/how-does-it-work',
   STORIES: '/stories',

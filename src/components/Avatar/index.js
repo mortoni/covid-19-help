@@ -4,7 +4,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles'
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
-    backgroundColor: '#44b700',
+    backgroundColor: '#44b700', // TODO: add this color to the theme pallete
     color: '#44b700',
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
     '&::after': {

@@ -3,7 +3,7 @@ import { useCollectionOnce } from 'react-firebase-hooks/firestore'
 import { db } from '../firebase'
 
 const useTask = ({ taskId }) => {
-  const [item, loading, error] = useCollectionOnce(db.collection('tasks').doc(taskId))
+  const [item] = useCollectionOnce(db.collection('tasks').doc(taskId))
   const [task, setTask] = React.useState()
   const [offers, setOffers] = React.useState([])
 

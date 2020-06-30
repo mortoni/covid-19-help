@@ -48,7 +48,6 @@ function useAsync() {
     isLoading: status === 'pending',
     isError: status === 'rejected',
     isSuccess: status === 'resolved',
-
     setData,
     setError,
     error,
