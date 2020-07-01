@@ -5,6 +5,7 @@ import React from 'react'
 import { bootstrapAppData } from 'utils/bootstrap'
 import * as authClient from 'utils/auth-client'
 import { useAsync } from 'utils/use-async'
+import PageErrorFallback from 'pages/Error'
 // import { FullPageSpinner, FullPageErrorFallback } from 'components/lib'
 
 const AuthContext = React.createContext()
@@ -42,7 +43,7 @@ function AuthProvider(props) {
   }
 
   if (isError) {
-    return <>FullPageErrorFallback</>
+    return <PageErrorFallback />
   }
 
   if (isSuccess) {

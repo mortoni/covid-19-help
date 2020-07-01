@@ -2,6 +2,7 @@ import React from 'react'
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { Box, Typography, Paper, MenuItem } from '@material-ui/core'
 import TextField from 'components/TextField'
+import PropTypes from 'prop-types'
 
 const AddressField = ({ name, setValue, getValues, ...formProps }) => {
   const [location, setLocation] = React.useState(getValues(name))
@@ -72,6 +73,12 @@ const AddressField = ({ name, setValue, getValues, ...formProps }) => {
       )}
     </PlacesAutocomplete>
   )
+}
+
+AddressField.propTypes = {
+  name: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
+  getValues: PropTypes.func.isRequired,
 }
 
 export default AddressField

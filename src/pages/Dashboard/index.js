@@ -42,13 +42,13 @@ const Dashboard = () => {
 
         <Box className={classes.tabContainer} flexGrow={1}>
           {TABS.map(({ component, name }, i) => (
-            <TabPanel key={name} value={tab} index={i}>
+            <TabPanel key={name} value={tab} index={i} height="100%">
               {React.cloneElement(component, {})}
             </TabPanel>
           ))}
         </Box>
       </Box>
-      <Box display="flex" flex={1}>
+      <Box display={{ xs: 'none', md: 'flex' }} flex={1}>
         <OAMap />
       </Box>
     </Box>

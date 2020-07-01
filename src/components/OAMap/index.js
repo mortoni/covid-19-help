@@ -6,6 +6,7 @@ import TaskIndicator from './components/TaskIndicator'
 import { TasksContext } from 'context/task-context'
 import useTasksAround from 'utils/use-tasks-around'
 import TaskMarker from './components/TaskMarker'
+import TaskSearch from './components/TaskSearch'
 
 const UserMarker = () => <PinIcon />
 
@@ -15,10 +16,16 @@ const OAMap = () => {
   const { tasksAround } = useTasksAround()
   const isLoading = false
 
+  const mapOptions = {
+    fullscreenControl: false,
+    zoomControl: false,
+  }
+
   if (!isLoading && tasksAround) {
     return (
       <div style={{ height: '100%', width: '100%', position: 'relative' }}>
         <GoogleMapReact
+          options={mapOptions}
           bootstrapURLKeys={{ key: process.env.REACT_APP_MAPS_KEY }}
           defaultCenter={{
             lat: user.address.lat,
@@ -40,6 +47,7 @@ const OAMap = () => {
           ))}
         </GoogleMapReact>
         <TaskIndicator number={tasksAround.length} address={user.address} />
+        <TaskSearch />
       </div>
     )
   } else {
