@@ -7,10 +7,11 @@ export const AUTHENTICATED_ROUTES = {
 }
 
 export const UNATHENTICATED_ROUTES = {
-  ABOUT: '/about',
-  HOW: '/how-does-it-work',
-  STORIES: '/stories',
-  FAQ: '/faq',
+  // ABOUT: '/about',
+  // HOW: '/how-does-it-work',
+  // STORIES: '/stories',
+  // FAQ: '/faq',
   SIGNUP: '/signup',
   LOGIN: '/login',
+  LANDING: '/',
 }

@@ -1,16 +1,26 @@
 import React from 'react'
-import { Box, TextField, InputAdornment, Typography, IconButton, SvgIcon, Button } from '@material-ui/core'
+import { Box, TextField, InputAdornment, Typography, SvgIcon, Button } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import TaskAroundTile from './components/TaskAroundTile'
 import useTasksAround from 'utils/use-tasks-around'
 import { ReactComponent as MapIcon } from 'assets/icons/map.svg'
 import OAMap from 'components/OAMap'
+import { makeStyles } from '@material-ui/core/styles'
+import { TasksContext } from 'context/task-context'
 
+const useStyles = makeStyles((theme) => ({
+  button: {
+    backgroundColor: 'white',
+    alignItems: 'flex-start',
+  },
+}))
 const TaskAround = () => {
+  const classes = useStyles()
   const [search, setSearch] = React.useState('')
   const [toggle, setToggle] = React.useState(false)
   const { tasksAround } = useTasksAround()
   const [filtered, setFiltered] = React.useState([])
+  // const { tasks, dispatch } = React.useContext(TasksContext)
 
   function filterTask(e) {
     setSearch(e.target.value)
@@ -30,8 +40,8 @@ const TaskAround = () => {
 
   return (
     <>
-      <Box m={2} display={toggle ? 'none' : 'block'}>
-        <Box display="flex">
+      <Box mx={{ xs: 1, sm: 2 }} my={2} display={toggle ? 'none' : 'flex'}>
+        <Box display="flex" flexGrow={1}>
           <TextField
             id="search-task"
             variant="outlined"
@@ -48,14 +58,9 @@ const TaskAround = () => {
             fullWidth
           />
           <Box display={{ xs: 'flex', md: 'none' }} ml={{ xs: 2, md: 0 }}>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={() => setToggle(true)}
-            >
+            <Button variant="contained" className={classes.button} onClick={() => setToggle(true)}>
               <SvgIcon component={MapIcon} style={{ fontSize: 30, marginTop: 4 }} />
-            </IconButton>
+            </Button>
           </Box>
         </Box>
 
@@ -80,8 +85,8 @@ const TaskAround = () => {
         </Box>
       </Box>
 
-      <Box display={{ xs: 'flex', md: 'none' }} height="100%">
-        <Box display={toggle ? 'flex' : 'none'} height="100%" flex={1}>
+      <Box display={{ xs: 'flex', md: 'none' }} flexGrow={1}>
+        <Box display={toggle ? 'flex' : 'none'} flexGrow={1}>
           <OAMap />
         </Box>
       </Box>

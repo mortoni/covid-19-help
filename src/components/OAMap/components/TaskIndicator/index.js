@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      width: '95%',
+    },
   },
   label: {
     color: 'white',

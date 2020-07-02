@@ -17,11 +17,11 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Box display="flex" height={100} justifyContent="center">
             <Loader size={15} color={'#6C63FF'} loading={isLoading} />
           </Box>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           {isError && <Typography>{error}</Typography>}
         </Grid>

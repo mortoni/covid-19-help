@@ -16,6 +16,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   tabContainer: {
     backgroundColor: '#EAEAEF',
+    display: 'flex',
   },
 }))
 const Dashboard = () => {
@@ -42,7 +43,7 @@ const Dashboard = () => {
 
         <Box className={classes.tabContainer} flexGrow={1}>
           {TABS.map(({ component, name }, i) => (
-            <TabPanel key={name} value={tab} index={i} height="100%">
+            <TabPanel key={name} value={tab} index={i}>
               {React.cloneElement(component, {})}
             </TabPanel>
           ))}

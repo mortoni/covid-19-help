@@ -4,8 +4,10 @@ const initialState = {
   onHover: null,
   selected: {},
   offerDialog: false,
+  toggledMap: false,
 }
 // TODO rename this context, it will be a context for configuration
+// TODO merge progress context here
 const TasksContext = createContext(initialState)
 const tasksReducer = (state, { type, value }) => {
   switch (type) {
@@ -23,6 +25,11 @@ const tasksReducer = (state, { type, value }) => {
       return {
         ...state,
         offerDialog: true,
+      }
+    case 'toggleMap':
+      return {
+        ...state,
+        toggledMap: value,
       }
     default:
       return state

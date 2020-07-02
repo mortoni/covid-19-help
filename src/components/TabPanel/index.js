@@ -8,9 +8,14 @@ const TabPanel = ({ children, value, index, ...other }) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      flexGrow={1}
       {...other}
     >
-      {value === index && <Box height="100%">{children}</Box>}
+      {value === index && (
+        <Box display="flex" flexDirection="column" flexGrow={1} height="100%">
+          {children}
+        </Box>
+      )}
     </Box>
   )
 }

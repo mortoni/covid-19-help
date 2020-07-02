@@ -9,22 +9,31 @@ import StoriesPage from 'pages/Stories'
 import FAQPage from 'pages/FAQ'
 import SignupPage from 'pages/Signup'
 import LoginPage from 'pages/Login'
+import LandingPage from 'pages/Landing'
+import ProgressBar from 'components/ProgressBar'
+
+function RouterWrapper({ children }) {
+  return <>{children}</>
+}
 
 const UnauthenticatedApp = () => {
   React.useEffect(() => {
-    navigate(UNATHENTICATED_ROUTES.LOGIN)
+    navigate(UNATHENTICATED_ROUTES.LANDING)
   }, [])
 
   return (
     <>
-      <HomeHeader />
-      <Router>
-        <AboutPage path={UNATHENTICATED_ROUTES.ABOUT} />
+      <ProgressBar />
+      {/* <HomeHeader /> TODO: decide what to do with this header */}
+      <Router component={RouterWrapper}>
+        {/* <AboutPage path={UNATHENTICATED_ROUTES.ABOUT} />
         <HowPage path={UNATHENTICATED_ROUTES.HOW} />
         <StoriesPage path={UNATHENTICATED_ROUTES.STORIES} />
         <FAQPage path={UNATHENTICATED_ROUTES.FAQ} />
-        <SignupPage path={UNATHENTICATED_ROUTES.SIGNUP} />
+        */}
         <LoginPage path={UNATHENTICATED_ROUTES.LOGIN} />
+        <SignupPage path={UNATHENTICATED_ROUTES.SIGNUP} />
+        <LandingPage path={UNATHENTICATED_ROUTES.LANDING} />
       </Router>
     </>
   )

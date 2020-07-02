@@ -1,4 +1,5 @@
 import React from 'react'
+import { ProgressContext } from 'context/progress-contex'
 
 function useSafeDispatch(dispatch) {
   const mounted = React.useRef(false)
@@ -13,16 +14,22 @@ const initialState = { status: 'idle', data: null, error: null }
 
 function useAsync() {
   const [{ status, data, error }, setState] = React.useReducer((s, a) => ({ ...s, ...a }), initialState)
+  const { dispatch } = React.useContext(ProgressContext)
 
   const safeSetState = useSafeDispatch(setState)
 
   const run = React.useCallback(
-    (promise) => {
+    (promise, showProgress = false) => {
       if (!promise || !promise.then) {
         throw new Error(
           `The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?`,
         )
       }
+
+      if (showProgress) {
+        dispatch({ type: 'active' })
+      }
+
       safeSetState({ status: 'pending' })
       return promise.then(
         (data) => {
@@ -35,7 +42,7 @@ function useAsync() {
         },
       )
     },
-    [safeSetState],
+    [dispatch, safeSetState],
   )
 
   const setData = React.useCallback((data) => safeSetState({ data }), [safeSetState])

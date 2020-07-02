@@ -1,14 +1,22 @@
 import React from 'react'
-import { Box, TextField, InputAdornment, IconButton, SvgIcon } from '@material-ui/core'
+import { Box, TextField, InputAdornment, SvgIcon, Button } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import useTasksAround from 'utils/use-tasks-around'
 import { ReactComponent as MapIcon } from 'assets/icons/map.svg'
+import { makeStyles } from '@material-ui/core/styles'
 
+const useStyles = makeStyles((theme) => ({
+  button: {
+    backgroundColor: 'white',
+    alignItems: 'flex-start',
+  },
+}))
 const TaskSearch = () => {
   const [search, setSearch] = React.useState('')
   const [toggle, setToggle] = React.useState(false)
   const { tasksAround } = useTasksAround()
   const [filtered, setFiltered] = React.useState([])
+  const classes = useStyles()
 
   function filterTask(e) {
     setSearch(e.target.value)
@@ -19,7 +27,7 @@ const TaskSearch = () => {
 
   return (
     <Box display={{ xs: 'flex', md: 'none' }} justifyContent="center">
-      <Box position="absolute" top={16} display="flex" width="100%" padding={{ xs: 1, sm: 2 }}>
+      <Box position="absolute" top={16} display="flex" width="100%" px={{ xs: 1, sm: 2 }}>
         <TextField
           id="search-task"
           variant="outlined"
@@ -36,14 +44,9 @@ const TaskSearch = () => {
           fullWidth
         />
         <Box display={{ xs: 'flex', md: 'none' }} ml={{ xs: 2, md: 0 }}>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={() => setToggle(true)}
-          >
+          <Button variant="contained" className={classes.button} onClick={() => setToggle(true)}>
             <SvgIcon component={MapIcon} style={{ fontSize: 30, marginTop: 4 }} />
-          </IconButton>
+          </Button>
         </Box>
       </Box>
     </Box>

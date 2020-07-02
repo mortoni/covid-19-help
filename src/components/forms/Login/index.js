@@ -11,17 +11,12 @@ const LoginForm = () => {
   const { login } = useAuth()
   const { isLoading, isError, error, run } = useAsync()
   const onSubmit = ({ email, password }) => {
-    run(login({ email, password }))
+    run(login({ email, password }), true)
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Box display="flex" height={100} justifyContent="center">
-            <Loader size={15} color={'#6C63FF'} loading={isLoading} />
-          </Box>
-        </Grid>
         <Grid item xs={12}>
           {isError && <Typography>{error}</Typography>}
         </Grid>
@@ -30,6 +25,13 @@ const LoginForm = () => {
         </Grid>
         <Grid item xs={12}>
           <TextField name="password" type="password" {...formProps} fullWidth required />
+        </Grid>
+        <Grid item xs={12}>
+          <Box my={2} textAlign="center">
+            <Typography variant="body2" color="textSecondary">
+              Forgot my password
+            </Typography>
+          </Box>
         </Grid>
         <Grid container item xs={12} justify="center">
           <Box minWidth={140}>
