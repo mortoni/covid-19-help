@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react'
 import { useAuth } from 'context/auth-context'
 import { ReactComponent as PinIcon } from 'assets/icons/pin.svg'
 import TaskIndicator from './components/TaskIndicator'
-import { TasksContext } from 'context/task-context'
+import { SharedContext } from 'context/shared-context'
 import useTasksAround from 'utils/use-tasks-around'
 import TaskMarker from './components/TaskMarker'
 import TaskSearch from './components/TaskSearch'
@@ -12,7 +12,7 @@ const UserMarker = () => <PinIcon />
 
 const OAMap = () => {
   const { user } = useAuth()
-  const { tasks } = React.useContext(TasksContext)
+  const { shared } = React.useContext(SharedContext)
   const { tasksAround } = useTasksAround()
   const isLoading = false
 
@@ -42,7 +42,7 @@ const OAMap = () => {
               lat={task.address.lat}
               lng={task.address.lng}
               taskId={task.id}
-              tasksService={tasks}
+              tasksService={shared}
             />
           ))}
         </GoogleMapReact>

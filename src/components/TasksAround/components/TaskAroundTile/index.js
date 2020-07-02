@@ -3,7 +3,7 @@ import { Box, Paper, Typography, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import Avatar from 'components/Avatar'
-import { TasksContext } from 'context/task-context'
+import { SharedContext } from 'context/shared-context'
 import Dialog from 'components/Dialog'
 import OfferToHelp from '../OfferToHelp'
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 const TaskAroundTile = ({ createdAt, description, address, name, username, id }) => {
   const classes = useStyles()
-  const { dispatch } = React.useContext(TasksContext)
+  const { dispatch } = React.useContext(SharedContext)
   const [open, setOpen] = React.useState(false)
 
   function handleSelect() {

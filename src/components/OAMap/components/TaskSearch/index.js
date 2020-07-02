@@ -2,21 +2,23 @@ import React from 'react'
 import { Box, TextField, InputAdornment, SvgIcon, Button } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import useTasksAround from 'utils/use-tasks-around'
-import { ReactComponent as MapIcon } from 'assets/icons/map.svg'
+import { ReactComponent as ListIcon } from 'assets/icons/list.svg'
 import { makeStyles } from '@material-ui/core/styles'
+import { SharedContext } from 'context/shared-context'
 
 const useStyles = makeStyles((theme) => ({
   button: {
     backgroundColor: 'white',
     alignItems: 'flex-start',
+    color: 'transparent',
   },
 }))
 const TaskSearch = () => {
+  const classes = useStyles()
+  const { dispatch } = React.useContext(SharedContext)
   const [search, setSearch] = React.useState('')
-  const [toggle, setToggle] = React.useState(false)
   const { tasksAround } = useTasksAround()
   const [filtered, setFiltered] = React.useState([])
-  const classes = useStyles()
 
   function filterTask(e) {
     setSearch(e.target.value)
@@ -44,8 +46,12 @@ const TaskSearch = () => {
           fullWidth
         />
         <Box display={{ xs: 'flex', md: 'none' }} ml={{ xs: 2, md: 0 }}>
-          <Button variant="contained" className={classes.button} onClick={() => setToggle(true)}>
-            <SvgIcon component={MapIcon} style={{ fontSize: 30, marginTop: 4 }} />
+          <Button
+            variant="contained"
+            className={classes.button}
+            onClick={() => dispatch({ type: 'toggleMap', value: false })}
+          >
+            <SvgIcon component={ListIcon} style={{ fontSize: 30, marginTop: 4 }} />
           </Button>
         </Box>
       </Box>

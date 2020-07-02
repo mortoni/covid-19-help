@@ -27,7 +27,7 @@ const SignupPage = () => {
 
       <Box display="flex" flexGrow={1}>
         <Container maxWidth="sm" component="main">
-          <Box mt={16} display="flex" flexDirection="column" alignItems="center">
+          <Box mt={{ xs: 2, sm: 4, md: 16 }} display="flex" flexDirection="column" alignItems="center">
             <Typography variant="h5">Sign up to One Another</Typography>
 
             <Box mt={2}>

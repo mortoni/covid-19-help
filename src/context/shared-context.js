@@ -8,8 +8,8 @@ const initialState = {
 }
 // TODO rename this context, it will be a context for configuration
 // TODO merge progress context here
-const TasksContext = createContext(initialState)
-const tasksReducer = (state, { type, value }) => {
+const SharedContext = createContext(initialState)
+const sharedReducer = (state, { type, value }) => {
   switch (type) {
     case 'hover':
       return {
@@ -36,13 +36,13 @@ const tasksReducer = (state, { type, value }) => {
   }
 }
 
-const TasksProvider = ({ children }) => {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialState)
-  const value = { tasks, dispatch }
+const SharedProvider = ({ children }) => {
+  const [shared, dispatch] = useReducer(sharedReducer, initialState)
+  const value = { shared, dispatch }
 
-  return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
+  return <SharedContext.Provider value={value}>{children}</SharedContext.Provider>
 }
 
-const TasksContexConsumer = TasksContext.Consumer
+const SharedContexConsumer = SharedContext.Consumer
 
-export { tasksReducer, TasksContext, TasksProvider, TasksContexConsumer }
+export { sharedReducer, SharedContext, SharedProvider, SharedContexConsumer }

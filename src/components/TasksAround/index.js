@@ -6,7 +6,7 @@ import useTasksAround from 'utils/use-tasks-around'
 import { ReactComponent as MapIcon } from 'assets/icons/map.svg'
 import OAMap from 'components/OAMap'
 import { makeStyles } from '@material-ui/core/styles'
-import { TasksContext } from 'context/task-context'
+import { SharedContext } from 'context/shared-context'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -17,10 +17,9 @@ const useStyles = makeStyles((theme) => ({
 const TaskAround = () => {
   const classes = useStyles()
   const [search, setSearch] = React.useState('')
-  const [toggle, setToggle] = React.useState(false)
   const { tasksAround } = useTasksAround()
   const [filtered, setFiltered] = React.useState([])
-  // const { tasks, dispatch } = React.useContext(TasksContext)
+  const { shared, dispatch } = React.useContext(SharedContext)
 
   function filterTask(e) {
     setSearch(e.target.value)
@@ -35,12 +34,10 @@ const TaskAround = () => {
   }
 
   const tasks = search.length > 0 ? filtered : tasksAround //TODO move this logic to the tasks context
-  // const mapDisplay = toggle ? 'flex' : 'none'
-  // debugger
 
   return (
     <>
-      <Box mx={{ xs: 1, sm: 2 }} my={2} display={toggle ? 'none' : 'flex'}>
+      <Box mx={{ xs: 1, sm: 2 }} my={2} display={shared.toggledMap ? 'none' : 'flex'}>
         <Box display="flex" flexGrow={1}>
           <TextField
             id="search-task"
@@ -58,7 +55,11 @@ const TaskAround = () => {
             fullWidth
           />
           <Box display={{ xs: 'flex', md: 'none' }} ml={{ xs: 2, md: 0 }}>
-            <Button variant="contained" className={classes.button} onClick={() => setToggle(true)}>
+            <Button
+              variant="contained"
+              className={classes.button}
+              onClick={() => dispatch({ type: 'toggleMap', value: true })}
+            >
               <SvgIcon component={MapIcon} style={{ fontSize: 30, marginTop: 4 }} />
             </Button>
           </Box>
@@ -86,7 +87,7 @@ const TaskAround = () => {
       </Box>
 
       <Box display={{ xs: 'flex', md: 'none' }} flexGrow={1}>
-        <Box display={toggle ? 'flex' : 'none'} flexGrow={1}>
+        <Box display={shared.toggledMap ? 'flex' : 'none'} flexGrow={1}>
           <OAMap />
         </Box>
       </Box>

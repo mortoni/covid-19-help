@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography, Grid, Button, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { TasksContext } from 'context/task-context'
+import { SharedContext } from 'context/shared-context'
 import format from 'date-fns/format'
 import Avatar from 'components/Avatar'
 import { addOffer } from 'utils/task-client'
@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
 }))
 const OfferToHelp = () => {
   // TODO divider each step in a component
-  const { tasks, dispatch } = React.useContext(TasksContext)
+  const { shared, dispatch } = React.useContext(SharedContext)
   const classes = useStyles()
   const [offer, setOffer] = React.useState(false)
   const [submited, setSubmitted] = React.useState(false)
   const { isLoading, run } = useAsync()
   const { user } = useAuth()
   const [message, setMessage] = React.useState('')
-  const task = tasks.selected
+  const task = shared.selected
 
   function handleOffer(e) {
     e.preventDefault()

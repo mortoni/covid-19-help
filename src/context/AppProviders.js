@@ -1,14 +1,14 @@
 import React from 'react'
 import { AuthProvider } from 'context/auth-context'
-import { TasksProvider } from 'context/task-context'
+import { SharedProvider } from 'context/shared-context'
 import { ProgressProvider } from 'context/progress-contex'
 
 function AppProviders({ children }) {
   return (
     <AuthProvider>
-      <TasksProvider>
+      <SharedProvider>
         <ProgressProvider>{children}</ProgressProvider>
-      </TasksProvider>
+      </SharedProvider>
     </AuthProvider>
   )
 }

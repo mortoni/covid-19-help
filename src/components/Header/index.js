@@ -9,7 +9,6 @@ import Logo from 'assets/logo.png'
 import OneAnother from 'assets/oneAnother.png'
 import Dialog from 'components/Dialog'
 import Notifications from './components/Notification'
-import Messages from './components/Messages'
 import UserMenu from './components/UserMenu'
 import { ReactComponent as PenIcon } from 'assets/icons/pen-icon.svg'
 import CreateTask from 'components/forms/CreateTask'
@@ -68,7 +67,6 @@ export default function MenuAppBar() {
 
           <Box display={{ xs: 'none', sm: 'flex' }}>
             <Notifications />
-            <Messages />
           </Box>
 
           <UserMenu />
