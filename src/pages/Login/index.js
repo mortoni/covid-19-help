@@ -27,7 +27,7 @@ const Login = () => {
 
       <Box display="flex" flexGrow={1}>
         <Container maxWidth="sm" component="main">
-          <Box mt={16} display="flex" flexDirection="column" alignItems="center">
+          <Box mt={{ xs: 10, sm: 16 }} display="flex" flexDirection="column" alignItems="center">
             <Typography variant="h5">Login to One Another</Typography>
 
             <Box mt={2} width={225} textAlign="center">

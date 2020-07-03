@@ -17,11 +17,11 @@ exports.login = (request, response) => {
       return data.user.getIdToken()
     })
     .then((token) => {
-      return response.set({ 'Access-Control-Allow-Origin': '*' }).json({ token })
+      return response.json({ token })
     })
     .catch((error) => {
       console.error(error)
-      return response.status(403).set({ 'Access-Control-Allow-Origin': '*' }).json({
+      return response.status(403).json({
         general: 'wrong credentials, please try again',
       })
     })
@@ -45,10 +45,7 @@ exports.signUp = (request, response) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        return response
-          .set({ 'Access-Control-Allow-Origin': '*' })
-          .status(400)
-          .json({ username: 'this username is already taken' })
+        return response.status(400).json({ username: 'this username is already taken' })
       } else {
         return firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
       }
@@ -72,17 +69,14 @@ exports.signUp = (request, response) => {
       return db.doc(`/users/${newUser.username}`).set(userCredentials)
     })
     .then(() => {
-      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(201).json({ token })
+      return response.status(201).json({ token })
     })
     .catch((err) => {
       console.error(err)
       if (err.code === 'auth/email-already-in-use') {
-        return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json({ email: 'Email already in use' })
+        return response.status(400).json({ email: 'Email already in use' })
       } else {
-        return response
-          .set({ 'Access-Control-Allow-Origin': '*' })
-          .status(500)
-          .json({ general: 'Something went wrong, please try again', err })
+        return response.status(500).json({ general: 'Something went wrong, please try again', err })
       }
     })
 }
@@ -113,10 +107,7 @@ exports.uploadProfilePhoto = (request, response) => {
 
   busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
     if (mimetype !== 'image/png' && mimetype !== 'image/jpeg') {
-      return response
-        .set({ 'Access-Control-Allow-Origin': '*' })
-        .status(400)
-        .json({ error: 'Wrong file type submited' })
+      return response.status(400).json({ error: 'Wrong file type submited' })
     }
     const imageExtension = filename.split('.')[filename.split('.').length - 1]
     imageFileName = `${request.user.username}.${imageExtension}`
@@ -146,11 +137,11 @@ exports.uploadProfilePhoto = (request, response) => {
         })
       })
       .then(() => {
-        return response.set({ 'Access-Control-Allow-Origin': '*' }).json({ message: 'Image uploaded successfully' })
+        return response.json({ message: 'Image uploaded successfully' })
       })
       .catch((error) => {
         console.error(error)
-        return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: error.code })
+        return response.status(500).json({ error: error.code })
       })
   })
 
@@ -165,12 +156,12 @@ exports.getDetail = (request, response) => {
     .then((doc) => {
       if (doc.exists) {
         userData.userCredentials = doc.data()
-        return response.set({ 'Access-Control-Allow-Origin': '*' }).json(userData)
+        return response.json(userData)
       }
     })
     .catch((error) => {
       console.error(error)
-      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'error to fetch user' })
+      return response.status(500).json({ error: 'error to fetch user' })
     })
 }
 
@@ -179,11 +170,11 @@ exports.updateDetails = (request, response) => {
   document
     .update(request.body)
     .then(() => {
-      response.set({ 'Access-Control-Allow-Origin': '*' }).json({ message: 'Updated successfully' })
+      response.json({ message: 'Updated successfully' })
     })
     .catch((error) => {
       console.error(error)
-      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({
+      return response.status(500).json({
         message: 'Cannot Update the value',
       })
     })

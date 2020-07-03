@@ -21,6 +21,7 @@ async function client(endpoint, { data, headers: customHeaders, ...customConfig 
     if (response.status === 401 || response.status === 403) {
       logout()
       // refresh the page for them
+      // TODO go to login
       window.location.assign(window.location)
       return Promise.reject({ message: 'Please re-authenticate.' })
     }

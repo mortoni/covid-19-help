@@ -25,7 +25,7 @@ exports.createOffer = (request, response) => {
           offers: admin.firestore.FieldValue.arrayUnion(doc.id),
         })
         .then(() => {
-          return response.set({ 'Access-Control-Allow-Origin': '*' }).json(doc.id)
+          return response.json(doc.id)
         })
         .catch((err) => {
           console.error(err)

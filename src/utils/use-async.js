@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProgressContext } from 'context/progress-contex'
+import { SharedContext } from 'context/shared-context'
 
 function useSafeDispatch(dispatch) {
   const mounted = React.useRef(false)
@@ -14,7 +14,7 @@ const initialState = { status: 'idle', data: null, error: null }
 
 function useAsync() {
   const [{ status, data, error }, setState] = React.useReducer((s, a) => ({ ...s, ...a }), initialState)
-  const { dispatch } = React.useContext(ProgressContext)
+  const { dispatch } = React.useContext(SharedContext)
 
   const safeSetState = useSafeDispatch(setState)
 
@@ -27,7 +27,7 @@ function useAsync() {
       }
 
       if (showProgress) {
-        dispatch({ type: 'active' })
+        dispatch({ type: 'progress', value: true })
       }
 
       safeSetState({ status: 'pending' })

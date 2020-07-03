@@ -37,7 +37,7 @@ const TaskAround = () => {
 
   return (
     <>
-      <Box mx={{ xs: 1, sm: 2 }} my={2} display={shared.toggledMap ? 'none' : 'flex'}>
+      <Box mx={{ xs: 1, sm: 2 }} my={2} display={shared.toggledMap ? 'none' : 'flex'} flexDirection="column">
         <Box display="flex" flexGrow={1}>
           <TextField
             id="search-task"

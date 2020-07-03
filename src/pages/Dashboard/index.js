@@ -32,8 +32,8 @@ const Dashboard = () => {
 
   return (
     <Box display="flex" flexGrow={1}>
-      <Box mt={2} display="flex" flexDirection="column" flex={1}>
-        <Box m={2} mb={0}>
+      <Box display="flex" flexDirection="column" flex={1}>
+        <Box m={2} mb={0} mt={{ xs: 0, sm: 2 }}>
           <Tabs value={tab} onChange={handleTabChange} aria-label="simple tabs example">
             {TABS.map(({ name }, i) => (
               <Tab key={name} label={name} {...a11yProps(i)} />

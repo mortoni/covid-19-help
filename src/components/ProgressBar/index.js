@@ -1,12 +1,12 @@
 import React from 'react'
-import { ProgressContext } from 'context/progress-contex'
+import { SharedContext } from 'context/shared-context'
 import { LinearProgress, Box } from '@material-ui/core'
 
 const ProgressBar = () => {
-  const { progress } = React.useContext(ProgressContext)
+  const { shared } = React.useContext(SharedContext)
   return (
     <>
-      {progress.status && (
+      {shared.inProgress && (
         <Box position="absolute" top={0} width="100%">
           <LinearProgress color="secondary" />
         </Box>

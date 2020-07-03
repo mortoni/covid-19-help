@@ -16,17 +16,17 @@ exports.getAll = (request, response) => {
           createdAt: doc.data().createdAt,
         })
       })
-      return response.set({ 'Access-Control-Allow-Origin': '*' }).json(todos)
+      return response.json(todos)
     })
     .catch((err) => {
       console.error(err)
-      return response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: err.code })
+      return response.status(500).json({ error: err.code })
     })
 }
 
 exports.createTask = (request, response) => {
   if (!request.user.username) {
-    return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json({ body: 'username Must not be empty' })
+    return response.status(400).json({ body: 'username Must not be empty' })
   }
 
   const newTask = {
@@ -45,78 +45,13 @@ exports.createTask = (request, response) => {
       // TODO solve this: add then
       db.collection('tasks').doc(doc.id).update({ taskId: doc.id })
 
-      return response.set({ 'Access-Control-Allow-Origin': '*' }).json(responseTaskItem)
+      return response.json(responseTaskItem)
     })
     .catch((err) => {
-      response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'Something went wrong' })
+      response.status(500).json({ error: 'Something went wrong' })
       console.error(err)
     })
 }
-
-// exports.createOffer = (request, response) => {
-//   const { taskId } = request.params
-
-//   const newOffer = {
-//     message: request.body.message,
-//     offerOwner: request.user.username,
-//     createdAt: new Date().toISOString(),
-//     read: false,
-//     status: 'pending',
-//     taskOwner: request.body.taskOwner,
-//     taskId,
-//   }
-
-//   db.collection('offers')
-//     .add(newOffer)
-//     .then((doc) => {
-//       // TODO: solve this
-//       db.collection('offers').doc(doc.id).update({ offerId: doc.id })
-
-//       db.collection('tasks')
-//         .doc(taskId)
-//         .update({
-//           offers: admin.firestore.FieldValue.arrayUnion(doc.id),
-//         })
-//         .then(() => {
-//           return response.set({ 'Access-Control-Allow-Origin': '*' }).json(doc.id)
-//         })
-//         .catch((err) => {
-//           console.error(err)
-//           return response.status(500).json({
-//             error: err.code,
-//           })
-//         })
-//     })
-//     .catch((err) => {
-//       console.error(err)
-//       return response.status(500).json({
-//         error: err.code,
-//       })
-//     })
-// }
-
-// exports.addOffer = (request, response) => {
-//   let taskRef = db.collection('tasks').doc(`${request.params.taskId}`)
-
-//   taskRef
-//     .update({
-//       offers: admin.firestore.FieldValue.arrayUnion({
-//         ...request.body,
-//         status: 'pending',
-//         read: false,
-//         createdAt: new Date().toISOString(),
-//       }),
-//     })
-//     .then(() => {
-//       response.json({ message: 'Updated successfully' })
-//     })
-//     .catch((err) => {
-//       console.error(err)
-//       return response.status(500).json({
-//         error: err.code,
-//       })
-//     })
-// }
 
 exports.assignTask = (request, response) => {
   const { assignedUser } = request.body
@@ -124,7 +59,7 @@ exports.assignTask = (request, response) => {
   const userRef = db.doc(`/users/${assignedUser.username}`)
 
   if (!request.user.username) {
-    return response.set({ 'Access-Control-Allow-Origin': '*' }).status(400).json({ body: 'username Must not be empty' })
+    return response.status(400).json({ body: 'username Must not be empty' })
   }
 
   const p1 = taskRef.update({
@@ -138,8 +73,6 @@ exports.assignTask = (request, response) => {
   })
 
   Promise.all([p1, p2])
-    .then(() => response.set({ 'Access-Control-Allow-Origin': '*' }).json('Updated successfully'))
-    .catch(() =>
-      response.set({ 'Access-Control-Allow-Origin': '*' }).status(500).json({ error: 'Something went wrong' }),
-    )
+    .then(() => response.json('Updated successfully'))
+    .catch(() => response.status(500).json({ error: 'Something went wrong' }))
 }

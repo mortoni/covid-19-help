@@ -5,6 +5,7 @@ const initialState = {
   selected: {},
   offerDialog: false,
   toggledMap: false,
+  inProgress: false,
 }
 // TODO rename this context, it will be a context for configuration
 // TODO merge progress context here
@@ -30,6 +31,11 @@ const sharedReducer = (state, { type, value }) => {
       return {
         ...state,
         toggledMap: value,
+      }
+    case 'progress':
+      return {
+        ...state,
+        inProgress: value,
       }
     default:
       return state
