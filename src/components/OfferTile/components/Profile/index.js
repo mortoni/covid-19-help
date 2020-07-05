@@ -3,7 +3,6 @@ import { Grid, Box, Typography, Button } from '@material-ui/core'
 import Avatar from 'components/Avatar'
 import LocationIcon from '@material-ui/icons/LocationOnOutlined'
 import Status from '../Status'
-import { useAuth } from 'context/auth-context'
 import { useAsync } from 'utils/use-async'
 import { assignTask } from 'utils/task-client'
 import { ReactComponent as ConfirmIcon } from 'assets/confirmation.svg'
@@ -29,7 +28,9 @@ const Profile = ({ user, taskId, onClose }) => {
           <Grid item xs={12}>
             <Box my={3} display="flex" alignItems="center" flexDirection="column">
               <Box position="relative" pr={3} pt={2}>
-                <Avatar size={12}>{`${user.firstName.charAt(0)} ${user.lastName.charAt(0)}`}</Avatar>
+                <Avatar size={12} imageScr={user.imageUrl}>{`${user.firstName.charAt(0)} ${user.lastName.charAt(
+                  0,
+                )}`}</Avatar>
               </Box>
               <Box my={2}>
                 <Typography variant="h4">{`${user.firstName} ${user.lastName}`}</Typography>

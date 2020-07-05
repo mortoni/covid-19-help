@@ -8,7 +8,7 @@ function isShowableOffer({ createdAt, read }) {
   const after = isAfter(addDays(new Date(createdAt), 3), new Date())
   return after || !read
 }
-
+// TODO this is being called several times 13 ++
 const useNotification = () => {
   const { user } = useAuth()
   const [offers] = useCollection(db.collection('offers').where('taskOwner', '==', user.username))
@@ -45,6 +45,7 @@ const useNotification = () => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 taskName: task.name,
+                imageUrl: user.imageUrl || '',
                 id: offer.offerId,
                 read: offer.read,
                 createdAt: offer.createdAt,

@@ -28,14 +28,13 @@ function register({ firstName, lastName, username, email, phoneNumber, address, 
     .then(({ userCredentials }) => userCredentials)
 }
 
-function uploadImage({ image }) {
+function uploadImage({ data }) {
   return client('user/image', {
-    data: { image },
+    data,
     headers: { 'content-type': 'multipart/form-data' },
-  }).then((response) => {
-    debugger
-    // TODO
   })
+    .then(() => client('user'))
+    .then(({ userCredentials }) => userCredentials)
 }
 
 function getToken() {

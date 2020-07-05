@@ -33,15 +33,14 @@ const CreateTask = ({ handleClose }) => {
       <Grid container spacing={2}>
         <Grid container item xs={12} justify="center">
           {!hasSubmitted && !isLoading && (
-            <>
+            <Box display="flex" flexDirection="column" textAlign="center">
               <Typography variant="h5"> Post a task</Typography>
-
-              <Box my={2} textAlign="center">
+              <Box my={2}>
                 <Typography variant="body1">
                   Name and describe your task so that your good neighbours can help you.
                 </Typography>
               </Box>
-            </>
+            </Box>
           )}
         </Grid>
         <Grid item xs={12}>

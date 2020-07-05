@@ -13,11 +13,8 @@ app.use(cors)
 
 app.get('/tasks', getAll)
 app.post('/createTask', auth, createTask)
-// app.put('/task/:taskId/addOffer', addOffer) // TODO delete when create offer is working
 app.post('/task/:taskId/createOffer', auth, createOffer)
-
 app.put('/task/:taskId/assign', auth, assignTask)
-
 app.post('/signup', signUp)
 app.post('/login', login)
 app.post('/user/image', auth, uploadProfilePhoto)

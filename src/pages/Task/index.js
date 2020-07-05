@@ -9,7 +9,7 @@ import useTask from 'utils/use-task'
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.grey[200],
-    height: '100%',
+    flexGrow: 1,
   },
   container: {
     backgroundColor: 'white',

@@ -51,7 +51,7 @@ const OfferToHelp = () => {
           </Grid>
 
           <Grid item container xs={12} alignItems="center">
-            <Avatar>{task.username}</Avatar>
+            <Avatar imageScr={user.imageUrl}>{task.username}</Avatar>
             <Typography variant="body1">
               posted by {task.username} on {format(new Date(task.createdAt), 'dd/MM/yyyy')}
             </Typography>

@@ -9,6 +9,7 @@ import Profile from 'pages/Profile'
 import Settings from 'pages/Settings'
 import HelpAndSupport from 'pages/HelpAndSupport'
 import Task from 'pages/Task'
+import ProgressBar from 'components/ProgressBar'
 
 // remove div that wraps pages/route
 function RouterWrapper({ children }) {
@@ -23,6 +24,10 @@ const AuthenticatedApp = () => {
   return (
     <Box display="flex" flexDirection="column" height="100%">
       <Header />
+      <Box position="relative">
+        <ProgressBar />
+      </Box>
+
       <Router primary={false} component={RouterWrapper}>
         <Dashboard path={AUTHENTICATED_ROUTES.DASHBOARD} />
         <Profile path={AUTHENTICATED_ROUTES.PROFILE} />

@@ -30,7 +30,7 @@ function getTime({ createdAt }) {
   return hours <= 24 ? `${hours}h` : `${days}d`
 }
 
-const NotificationTile = ({ taskName, taskId, read, createdAt, firstName, lastName, onClose }) => {
+const NotificationTile = ({ taskName, taskId, read, createdAt, firstName, lastName, imageUrl, onClose }) => {
   const classes = useStyles({ read })
 
   function handleOfferClick() {

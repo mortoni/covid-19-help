@@ -43,7 +43,9 @@ function AuthProvider(props) {
   }
 
   if (isError) {
-    return <PageErrorFallback />
+    logout()
+    window.location.assign(window.location)
+    // return <PageErrorFallback />
   }
 
   if (isSuccess) {

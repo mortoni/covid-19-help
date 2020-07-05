@@ -22,7 +22,7 @@ const OfferTile = ({ createdAt, message, read, status, user, taskId }) => {
           <Grid item xs={12}>
             <Box display="flex" justifyContent="space-between">
               <Box display="flex">
-                <Avatar>{`${user.firstName.charAt(0)}${user.lastName.charAt(0)}`} </Avatar>
+                <Avatar imageScr={user.imageUrl}>{`${user.firstName.charAt(0)}${user.lastName.charAt(0)}`} </Avatar>
                 <Box display="flex" flexDirection="column">
                   <Typography variant="h6">{user.firstName}</Typography>
                   <Typography variant="body1">{user.lastName}</Typography>

@@ -46,6 +46,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BadgeAvatars({ imageScr, size, children }) {
   const classes = useStyles({ size })
+  // const [image, setImage] = React.useState('')
+  // debugger
+
+  // React.useEffect(() => {
+  //   if (imageScr) {
+  //     setImage(imageScr)
+  //   }
+  // }, [imageScr])
 
   return (
     <div className={classes.root}>

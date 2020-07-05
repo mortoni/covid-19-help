@@ -58,14 +58,14 @@ const UserMenu = () => {
         color="primary"
         onClick={() => toggleDrawer(true)}
       >
-        <Avatar>{getInitials()}</Avatar>
+        <Avatar imageScr={user.imageUrl}>{getInitials()}</Avatar>
       </IconButton>
 
       <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)}>
         <Box width={300} p={2}>
           <Box className={classes.profile}>
             <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
-            <Avatar>{getInitials()}</Avatar>
+            <Avatar imageScr={user.imageUrl}>{getInitials()}</Avatar>
           </Box>
           <Box my={2}>
             <Button

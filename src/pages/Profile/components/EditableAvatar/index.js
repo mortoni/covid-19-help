@@ -1,30 +1,27 @@
 import React from 'react'
-import { Box, IconButton, Button } from '@material-ui/core'
+import { Box, IconButton } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import Avatar from 'components/Avatar'
 import { useAuth } from 'context/auth-context'
 import { useAsync } from 'utils/use-async'
 
-// firebase function for upload image is not working
-const EditAvatar = ({ firstName, lastName }) => {
-  const [image, setImage] = React.useState(null)
+const EditAvatar = ({ firstName, lastName, imageUrl }) => {
   const { uploadImage } = useAuth()
-  const { isLoading, isError, error, run } = useAsync()
+  const { run } = useAsync()
 
   function handleImageUpload({ target }) {
-    const fileReader = new FileReader()
+    const data = new FormData()
 
-    fileReader.readAsDataURL(target.files[0])
-    fileReader.onload = (e) => {
-      setImage(e.target.result)
-      // save image
-      run(uploadImage({ image: e.target.result }))
-    }
+    data.append('image', target.files[0])
+    run(uploadImage({ data }), true).then(() => {
+      // TODO find another solution other than refresh the whle app
+      window.location.reload()
+    })
   }
 
   return (
     <>
-      <Avatar imageScr={image} size={12}>{`${firstName.charAt(0)} ${lastName.charAt(0)}`}</Avatar>
+      <Avatar imageScr={imageUrl} size={12}>{`${firstName.charAt(0)} ${lastName.charAt(0)}`}</Avatar>
       <Box position="absolute" top={0} right={0}>
         <input
           accept="image/*"

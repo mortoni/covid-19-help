@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     cursor: 'pointer',
   },
+  oneAnother: {
+    cursor: 'pointer',
+  },
 }))
 export default function MenuAppBar() {
   const classes = useStyles()
@@ -49,7 +52,12 @@ export default function MenuAppBar() {
             </Box>
           </Box>
 
-          <Box display={'flex'} flexGrow={1}>
+          <Box
+            display={'flex'}
+            flexGrow={1}
+            className={classes.oneAnother}
+            onClick={() => navigate(AUTHENTICATED_ROUTES.DASHBOARD)}
+          >
             <img src={OneAnother} alt="Logo" width={68} height={64} />
           </Box>
 

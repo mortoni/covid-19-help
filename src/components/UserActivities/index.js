@@ -31,7 +31,7 @@ const UserActivities = () => {
             {userTasks.length}
           </Typography>
           <Box ml={0.5}>
-            <Typography variant="body2">tasks posted by you</Typography>
+            <Typography variant="body2">{`task${userTasks.length > 1 ? 's' : ''} posted by you`}</Typography>
           </Box>
         </Box>
 
@@ -42,7 +42,7 @@ const UserActivities = () => {
 
       <Box display={acceptedTasks.length === 0 ? 'flex' : 'none'} m={2}>
         <Typography variant="body2" className={classes.label}>
-          You have not accepted any tasks yet <HelpOutlineOutlinedIcon color="primary" />
+          You have not accepted any task yet <HelpOutlineOutlinedIcon color="primary" />
         </Typography>
       </Box>
       <Box display={acceptedTasks.length > 0 ? 'block' : 'none'}>
